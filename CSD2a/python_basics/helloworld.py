@@ -1,2 +1,2 @@
-username = input("Username: Jens" )
+username = input("Username: " )
 print("Welcome", username)
