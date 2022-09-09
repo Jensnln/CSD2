@@ -1,6 +1,1 @@
-qwefasd
-
-
-
-sadfawfasf
-jghhaslgfaaskldjfhasklfasfasdfhjas;df
+print("Hello World")
