@@ -1,5 +1,4 @@
-My first repo
+Dit is de CSD2 folder van Jens Loeven.
+In deze folder kan je al mijn opdrachten zien.
 
-Nu maak ik allemaal aanpassingen zodat ik kan checken hoe en wat
-
-Maar de vraag is of ik dat zo kan blijven doen
+Groetjes Jens
