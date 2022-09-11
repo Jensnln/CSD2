@@ -1,3 +1,9 @@
+# Import all modules
+import time
+
+# Declare variables
+
+
 # Open the input.txt file
 input_file = open('CSD2a/python_basics/input.txt')
 
@@ -22,3 +28,4 @@ print(times_playing)
 #  For loop om de functie te loopen met als variabele de input die wordt gevraagd.
 for x in range(int((times_playing))):
     loop_sample()
+    time.sleep(1)
