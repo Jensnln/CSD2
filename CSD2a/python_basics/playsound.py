@@ -12,3 +12,5 @@ def loop_sample():
 #  For loop om de functie te loopen met als variabele de input die wordt gevraagd.
 for x in range(int(times_playing)):
     loop_sample()
+    
+#  Test
