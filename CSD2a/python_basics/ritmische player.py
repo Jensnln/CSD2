@@ -1,5 +1,13 @@
+# Open the input.txt file
+input_file = open('CSD2a/python_basics/input.txt')
+
+# Lees de waardes uit en stop deze in een variable
+numPlaybackTimes = input_file.read()
+input_file.close()
+
 # Input vragen hoevaak de sample af te spelen.
-times_playing = input("Hoe vaak moet de sample worden afgespeeld? " )
+times_playing = numPlaybackTimes 
+print(times_playing)
 
 # Binnenhalen van de library en sample laden in de variabele "wave_obj".
 import simpleaudio as sa
@@ -9,6 +17,8 @@ def loop_sample():
     play_obj = wave_obj.play()
     play_obj.wait_done()
 
+print(times_playing)
+
 #  For loop om de functie te loopen met als variabele de input die wordt gevraagd.
-for x in range(int(times_playing)):
-     loop_sample()
+for x in range(int((times_playing))):
+    loop_sample()
