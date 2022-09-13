@@ -39,14 +39,14 @@ list_notes.pop()
 list_notes.pop(0)
 
 # Start a for loop as long as the list length.
-for index in range(len(list_notes)):
-    # Index the list so it cycles through.
-    list_note = list_notes[index]
+for notes in range(len(list_notes)):
+    # Indexes the list so it cycles through.
+    list_note = list_notes[notes]
 
     # Call the function.
     loop_sample()
 
     # Calculate the noteLength 1sec / (BPM / 60) = amount of beat per second.
-    # BPS * the notelength of the index.
-    noteLength = ((1/(int(noteTempo)/60))) * float(list_notes[index])
+    # BPS * the notelength of the notes.
+    noteLength = ((1/(int(noteTempo)/60))) * float(list_notes[notes])
     time.sleep(noteLength)
