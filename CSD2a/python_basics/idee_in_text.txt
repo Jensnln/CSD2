@@ -40,3 +40,9 @@ for x in noteAmount:
     noteLength(1 / (noteTempo / 60) * ListNotes[x])
     playSample()
     time.Sleep(noteLength)
+
+Polyphonic:
+Je hebt meerdere instanties van het de loop functie nodig.
+
+
+Time.sleep fix for delay

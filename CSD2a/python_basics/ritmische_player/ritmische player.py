@@ -11,7 +11,7 @@ input_file_content = input_file.read()
 # Put the content in the list.
 input_file_list = input_file_content.split()
 
-# Lees de waardes uit en stop deze in een variable
+# Lees de waardes uit en stop deze in een variable.
 input_file.close()
 
 # Input vragen hoevaak de sample af te spelen.
