@@ -2,6 +2,9 @@
 import time
 
 # Declare variables
+start_time = time.time()
+played_time = 0
+prev_noteLength = 0
 
 
 # Open the input.txt file
@@ -50,3 +53,7 @@ for notes in range(len(list_notes)):
     # BPS * the notelength of the notes.
     noteLength = ((1/(int(noteTempo)/60))) * float(list_notes[notes])
     time.sleep(noteLength)
+
+
+
+
