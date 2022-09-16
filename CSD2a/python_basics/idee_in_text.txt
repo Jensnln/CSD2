@@ -46,3 +46,9 @@ Je hebt meerdere instanties van het de loop functie nodig.
 
 
 Time.sleep fix for delay
+time.time() = time since epoch.
+Sla deze op in een variabele
+
+start_time = time.time()
+main()
+print("Elapsed Time: ", (start_time - time.time()))
