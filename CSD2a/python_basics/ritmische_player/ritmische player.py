@@ -1,5 +1,4 @@
 # Import all modules
-from sqlite3 import Timestamp
 import time
 
 # Declare variables
