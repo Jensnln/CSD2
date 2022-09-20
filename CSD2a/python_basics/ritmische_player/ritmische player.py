@@ -62,6 +62,7 @@ while has_more_notes:
         next_note_start_time = current_time + ((1/(int(noteTempo)/60))) * float(list_notes[next_note])
         next_note += 1
         loop_sample()
+        time.sleep(0.001)
 
         # If the next note index is higher then te current note turn the boolean false.
         if next_note == len(list_notes):
