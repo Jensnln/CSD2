@@ -31,4 +31,6 @@ void loop() {
 
 
   lastsensorVal = sensorVal;
+  Serial.println("Last Sensor val: " + lastsensorVal);
+//  delay(5);
 }
