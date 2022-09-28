@@ -1,0 +1,54 @@
+Overzicht van je input:
+4       Hoeveel hits.       noteAmount
+1       Kwartnoot.          noteFactor
+0.5     Achtste noot.       noteFactor
+1.5     Dotted Kwartnoot.   noteFactor
+0.5     Achstenoot.         noteFactor
+120     BPM                 noteTempo
+
+In je for loop staat hoeveel keer de sample wordt afgespeeld.
+Vervolgens deel je de BPM op in een aantal maten.
+Beats per minute = aantal tellen per minuut. Dus deel je je BPM door 60. Wat je overhoud is hoeveel beats per seconde. (e.g. 120 / 60 = 2).
+
+Als er 2 beats in een seconde zitten betekend het dat een kwartnoot een halve seconde is.
+
+Om te wachten gebruik je time.sleep(noteLength).
+
+noteLength = 1sec / (bpm / 60) * noteFactor.
+
+Omdat de bpm een constante is kan je die uit de variabele halen.
+
+Aangezien de noteFactor variabel is (binnen de for loop) moet je hierbij een lijst gebruiken.
+
+
+Zo ga je dus te werk:
+1. Maak een lijst aan en sla all variabelen hierin op.
+2. Sla de eerste waarde op in de noteAmount
+3. Sla de laatste waarde op in noteTempo
+4. Pak de overige waarden uit de lijst en zet ze in een nieuwe lijst.
+5. Cycle door deze lijst met de for loop en speel hiermee de zoveelste waarde af.
+
+
+
+Ruwe opzet:
+
+
+ListAll     [4, 1, 0.5, 1.5, 0.5, 120]
+ListNotes   [1, 0.5, 1.5, 0.5]
+
+for x in noteAmount:
+    noteLength(1 / (noteTempo / 60) * ListNotes[x])
+    playSample()
+    time.Sleep(noteLength)
+
+Polyphonic:
+Je hebt meerdere instanties van het de loop functie nodig.
+
+
+Time.sleep fix for delay
+time.time() = time since epoch.
+Sla deze op in een variabele
+
+start_time = time.time()
+main()
+print("Elapsed Time: ", (start_time - time.time()))
