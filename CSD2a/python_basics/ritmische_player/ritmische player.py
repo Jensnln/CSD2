@@ -7,7 +7,7 @@ played_time = 0
 
 
 # Open the input.txt file
-input_list = open('CSD2a/python_basics/ritmische_player/input.txt')
+input_list = open('input.txt')
 input_file_content = input_list.read()
 
 # Put the content in the list.

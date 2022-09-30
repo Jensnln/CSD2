@@ -1,6 +1,9 @@
 # Import all modules
 import time
+import simpleaudio as sa
 
+# Decalre valueables
+hh = sa.WaveObject.from_wave_file("HH.wav")
 bpm = 120
 
 # Ask to change bpm
@@ -23,11 +26,10 @@ if defaultNoteDurations == "y":
     for i in noteDurations:
         noteDurations[i] = float((input("Input duration: ", )))              # Ask all the durations
 elif defaultNoteDurations == "n":
-    noteDurations = [0.5, 1.0, 0.75, 1.0]
+    noteDurations = [1, 2, 0.75, 1.0, 1]
 print("Note durations: ", noteDurations)
 
-
-
+# Function to calculate durations to 16th stamps
 def durationsToTimestamps16th(src):
     dst = list(range(len(src)))
     dst.insert(0,0)
@@ -37,28 +39,43 @@ def durationsToTimestamps16th(src):
     # print("dst list: ", dst)
     return dst
 
+# Function to calculate 16th stamps to 16th durations
 def timeStamps16thTo16Durations16th(src, bpm):
     dst = list(range(len(src)))
     for i in range(len(src)):
         dur = src[i] * (60 / bpm / 4)
         dst[i] = dur
     # print("16th Durations: ", dst)
+    dst.pop()
     return dst
 
+# Function to play hh
 
-"""
-# Make a function to recalculate the note durations to 16th
-def durationsToTimestamps16th(src):
-  dst = list(range(len(src)))       # Make temp lst.
-  for i in range(len(src)):         # Save you calculation in a new variable.
-    dur = src[i] * ((60.0 / bpm) / 4)# Do your calculation.
-    dst[i] = dur                    # Give your new variable to the current index.
-  return dst                        # Return your list.
-"""
+# Feed functions
+stamps16th = durationsToTimestamps16th(noteDurations)
+print("tempList: ", stamps16th)
 
-tempList = durationsToTimestamps16th(noteDurations)
-print("tempList: ", tempList)
-
-noteDurations16th = timeStamps16thTo16Durations16th(tempList, bpm)
+noteDurations16th = timeStamps16thTo16Durations16th(stamps16th, bpm)
 print("Note durations 16th: ", noteDurations16th)
 
+def hhplay():
+    hhplaying = hh.play()
+    hhplaying.wait_done()
+
+# Function to start playing the timestamps
+def playFunction(src):
+    startTime = time.time()
+    playing : bool = True
+    counter = 0
+    while playing:
+        t = time.time() - startTime
+        if t > src[counter]:
+            print(counter + 1)
+            hhplay()
+            counter += 1
+        if counter > len(src) -1:
+            playing = False
+        time.sleep(0.01)
+
+
+playFunction(noteDurations16th)
