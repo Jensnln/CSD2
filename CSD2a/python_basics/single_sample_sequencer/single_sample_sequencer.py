@@ -2,16 +2,16 @@
 import time
 import simpleaudio as sa
 
-# Decalre valueables
+# Declare valueables
 hh = sa.WaveObject.from_wave_file("HH.wav")
 bpm = 120
 
 # Ask to change bpm
 changeDefaultBpm = input("Default bpm = 120. Want to adjust? [y/n]: ", )
-if changeDefaultBpm == "y":     # If statement.
+if changeDefaultBpm in ("y", "Y"):     # If statement.
     bpm = float(input("Input new bpm: ", ))  # Input new bpm
     print("New bpm is:", bpm)
-elif changeDefaultBpm == "n":
+elif changeDefaultBpm in ("n", "N"):
     bpm = 120.0
     print("Bpm is:", bpm)
 else:
@@ -21,12 +21,14 @@ else:
 # Ask for user input for note durations or default
 defaultNoteDurations = input("Want to adjust note durations? [y/n]: ", )
 print("Yes or no: ", defaultNoteDurations)
-if defaultNoteDurations == "y":
+if defaultNoteDurations in ("y", "Y"):
     noteDurations = list(range(int(input("How many notes? ", ))))
     for i in noteDurations:
         noteDurations[i] = float((input("Input duration: ", )))              # Ask all the durations
-elif defaultNoteDurations == "n":
+elif defaultNoteDurations in ("n", "N"):
     noteDurations = [1, 2, 0.75, 1.0, 1]
+else:
+    print("No valid input.")
 print("Note durations: ", noteDurations)
 
 # Function to calculate durations to 16th stamps
@@ -59,8 +61,8 @@ noteDurations16th = timeStamps16thTo16Durations16th(stamps16th, bpm)
 print("Note durations 16th: ", noteDurations16th)
 
 def hhplay():
+    global hhplaying
     hhplaying = hh.play()
-    hhplaying.wait_done()
 
 # Function to start playing the timestamps
 def playFunction(src):
@@ -75,7 +77,8 @@ def playFunction(src):
             counter += 1
         if counter > len(src) -1:
             playing = False
-        time.sleep(0.01)
+    hhplaying.wait_done()
+    time.sleep(0.01)
 
 
 playFunction(noteDurations16th)
