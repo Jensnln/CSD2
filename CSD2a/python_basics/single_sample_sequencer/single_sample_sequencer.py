@@ -80,5 +80,4 @@ def playFunction(src):
     hhplaying.wait_done()
     time.sleep(0.01)
 
-
 playFunction(noteDurations16th)
