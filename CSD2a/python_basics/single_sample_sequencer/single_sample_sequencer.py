@@ -78,6 +78,6 @@ def playFunction(src):
         if counter > len(src) -1:
             playing = False
     hhplaying.wait_done()
-    time.sleep(0.01)
 
 playFunction(noteDurations16th)
+time.sleep(2)
