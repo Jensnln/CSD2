@@ -7,35 +7,30 @@ kick = sa.WaveObject.from_wave_file("assets/kick.wav")
 rim = sa.WaveObject.from_wave_file("assets/rim.wav")
 hihat = sa.WaveObject.from_wave_file("assets/hihat.wav")
 
-rim_event = {
-'timestamp': 1000, # msec w.r.t start of program
-'instrumentname': "rim", # name of instrument in text
-'instrument': rim, # reference to sound file
-'velocity': 82, # numeric MIDI-based, 0-127
-'duration': 500 # msec
-}
+kick_notes = []
+rim_notes = []
+hihat_notes = []
 
-kick_event = {
-'timestamp': 2000, # msec w.r.t start of program
-'instrumentname': "kick", # name of instrument in text
-'instrument': kick, # reference to sound file
-'velocity': 82, # numeric MIDI-based, 0-127
-'duration': 500 # msec
-}
+event_list = [
+    {"name" : "rim", "instrument" : rim, "ts" : 1500}, 
+    {"name" : "rim", "instrument" : rim, "ts" : 1600}, 
+    {"name" : "rim", "instrument" : rim, "ts" : 1700}, 
+    {"name" : "kick", "instrument" : kick, "ts" : 1700}, 
+    {"name" : "rim", "instrument" : rim, "ts" : 2000}, 
+    ]
 
-hihat_event = {
-'timestamp': 5000, # msec w.r.t start of program
-'instrumentname': "hihat", # name of instrument in text
-'instrument': hihat, # reference to sound file
-'velocity': 82, # numeric MIDI-based, 0-127
-'duration': 500 # msec
-}
+# print(event_list)
 
 def handle_note_event(event):
-    # print(event['instrumentname'])
+    print(event['name'], event['ts'])
     event['instrument'].play()
 
-handle_note_event(kick_event)
-handle_note_event(hihat_event)
+# handle_note_event(kick_event)
+# handle_note_event(hihat_event)
+for event in event_list:
+    handle_note_event(event)
+
+
 
 time.sleep(2)
+
