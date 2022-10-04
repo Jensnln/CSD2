@@ -7,9 +7,17 @@ kick = sa.WaveObject.from_wave_file("assets/kick.wav")
 rim = sa.WaveObject.from_wave_file("assets/rim.wav")
 hihat = sa.WaveObject.from_wave_file("assets/hihat.wav")
 
-kick_notes = []
-rim_notes = []
-hihat_notes = []
+# Declare different variables
+bpm = 120
+
+
+kick_notes = [1, 0.5, 1, 0.5]
+rim_notes = [2, 2]
+hihat_notes = [0.5, 0.5, 0.5, 0.5]
+
+def append_notes(notes):
+    for i in notes:
+        
 
 event_list = [
     {"name" : "rim", "instrument" : rim, "ts" : 1500}, 
@@ -22,12 +30,12 @@ event_list = [
 # print(event_list)
 
 def handle_note_event(event):
-    print(event['name'], event['ts'])
     event['instrument'].play()
 
 # handle_note_event(kick_event)
 # handle_note_event(hihat_event)
 for event in event_list:
+    print(event['name'], event['ts'])
     handle_note_event(event)
 
 
