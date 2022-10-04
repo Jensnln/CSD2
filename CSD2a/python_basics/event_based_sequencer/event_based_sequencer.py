@@ -15,8 +15,8 @@ kick_notes = [1, 0.5, 1, 0.5]
 rim_notes = [2, 2]
 hihat_notes = [0.5, 0.5, 0.5, 0.5]
 
-def append_notes(notes):
-    for i in notes:
+
+
         
 
 event_list = [
