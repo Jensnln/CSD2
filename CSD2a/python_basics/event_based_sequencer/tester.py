@@ -2,73 +2,74 @@
 import time
 import simpleaudio as sa
 
-# Declare variables
-bpm = 120
-
-# Make variables a string
-kick_ = "kick"
-rim_ = "rim"
-hat_ = "hat"
-
 # Declare sample file paths
 kick = sa.WaveObject.from_wave_file("assets/kick.wav")
 rim = sa.WaveObject.from_wave_file("assets/rim.wav")
-hihat = sa.WaveObject.from_wave_file("assets/hihat.wav")
+hat = sa.WaveObject.from_wave_file("assets/hihat.wav")
+
+# Declare variables
+bpm = 120
 
 # Make the note lists
-kick_notes = [1, 2, 1, 2]
-rim_notes = [2, 2]
-hat_notes = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+kick_notes = [1, 1, 1, 1, 1, 1, 1, 1]
+rim_notes = [2, 2, 2, 2]
+hat_notes = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 
 # Function to calculate durations to 16th stamps
-def durationsToTimestamps16th(src):
+def note_to_dur(src):
     dst = list(range(len(src)))
     dst.insert(0,0)
     for i in range(len(src)):
         dur = src[i] * 4
-        dst[i + 1] = int(dst[i] + dur)
-    # print("dst list: ", dst)
+        dur = dur * (60 / bpm /4)
+        dst[i + 1] = dst[i] + dur
+    dst.pop(0)
     return dst
 
-kick_notes = durationsToTimestamps16th(kick_notes)
-rim_notes = durationsToTimestamps16th(rim_notes)
-hat_notes = durationsToTimestamps16th(hat_notes)
+# Insert the notes to dur function
+kick_notes = note_to_dur(kick_notes)
+rim_notes = note_to_dur(rim_notes)
+hat_notes = note_to_dur(hat_notes)
+print(f"kick_notes: {kick_notes}")
+print(f"rim_notes: {rim_notes}")
+print(f"hat_notes: {hat_notes}")
 
-# Function to calculate 16th stamps to 16th durations
-def timeStamps16thTo16Durations16th(src, bpm):
-    dst = list(range(len(src)))
-    for i in range(len(src)):
-        dur = src[i] * (60 / bpm / 4)
-        dst[i] = dur
-    # print("16th Durations: ", dst)
-    dst.pop()
-    return dst
-
-kick_notes = timeStamps16thTo16Durations16th(kick_notes, bpm)
-rim_notes = timeStamps16thTo16Durations16th(rim_notes, bpm)
-hat_notes = timeStamps16thTo16Durations16th(hat_notes, bpm)
-
-print("kick_notes: ", kick_notes)
-print("rim_notes: ", rim_notes)
-print("hat_notes: ", hat_notes)
-
-
-# Make an event list
+# Event list
 event_list = []
 
+# Function to add the _notes list as dicts to the event_list
+def add_event(instrument, ts):
+    for i in range(len(ts)):
+        temp_key = {}
+        temp_key["instrument"] = instrument
+        temp_key["ts"] = ts[i]
+        event_list.append(temp_key)
 
-def add_event(instrument, notes):
-    for note in notes:
-        tempkey = {}
-        tempkey["instrument"] = instrument
-        tempkey["note"] = note
-        event_list.append(tempkey)
+# Insert the function
+add_event(kick, kick_notes)
+add_event(rim, rim_notes)
+add_event(hat, hat_notes)
 
-# Add all events to the event_list
-add_event(kick_, kick_notes)
-add_event(rim_, rim_notes)
-add_event(hat_, hat_notes)
+# Function to play all the events
+def player(events):
+    start_time = time.time()
+    playing : bool = True
+    i = 0
+    while playing:
+        t = time.time() - start_time
+        if t > events[i]["ts"]:
+            events[i]["instrument"].play()
+            i += 1
+        if i == len(event_list):
+            playing = False
 
-# print(event_list)
+print(f"event_list: {event_list}")
 
+# Sort all dicts in the event list
+event_list = sorted(event_list, key=lambda d: d['ts']) 
 
+# Insert the function
+player(event_list)
+
+# Wacht totdat alle samples gespeeld zijn.
+time.sleep(1)

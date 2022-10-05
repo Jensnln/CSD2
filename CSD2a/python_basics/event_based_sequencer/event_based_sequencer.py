@@ -5,40 +5,71 @@ import simpleaudio as sa
 # Declare sample file paths
 kick = sa.WaveObject.from_wave_file("assets/kick.wav")
 rim = sa.WaveObject.from_wave_file("assets/rim.wav")
-hihat = sa.WaveObject.from_wave_file("assets/hihat.wav")
+hat = sa.WaveObject.from_wave_file("assets/hihat.wav")
 
-# Declare different variables
+# Declare variables
 bpm = 120
 
+# Make the note lists
+kick_notes = [1, 1, 1, 1, 1, 1, 1, 1]
+rim_notes = [2, 2, 2, 2]
+hat_notes = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 
-kick_notes = [1, 0.5, 1, 0.5]
-rim_notes = [2, 2]
-hihat_notes = [0.5, 0.5, 0.5, 0.5]
+# Function to calculate durations to 16th stamps
+def note_to_dur(src):
+    dst = list(range(len(src)))
+    dst.insert(0,0)
+    for i in range(len(src)):
+        dur = src[i] * 4
+        dur = dur * (60 / bpm /4)
+        dst[i + 1] = dst[i] + dur
+    dst.pop(0)
+    return dst
 
+# Insert the notes to dur function
+kick_notes = note_to_dur(kick_notes)
+rim_notes = note_to_dur(rim_notes)
+hat_notes = note_to_dur(hat_notes)
+print(f"kick_notes: {kick_notes}")
+print(f"rim_notes: {rim_notes}")
+print(f"hat_notes: {hat_notes}")
 
+# Event list
+event_list = []
 
-        
+# Function to add the _notes list as dicts to the event_list
+def add_event(instrument, ts):
+    for i in range(len(ts)):
+        temp_key = {}
+        temp_key["instrument"] = instrument
+        temp_key["ts"] = ts[i]
+        event_list.append(temp_key)
 
-event_list = [
-    {"name" : "rim", "instrument" : rim, "ts" : 1500}, 
-    {"name" : "rim", "instrument" : rim, "ts" : 1600}, 
-    {"name" : "rim", "instrument" : rim, "ts" : 1700}, 
-    {"name" : "kick", "instrument" : kick, "ts" : 1700}, 
-    {"name" : "rim", "instrument" : rim, "ts" : 2000}, 
-    ]
+# Insert the function
+add_event(kick, kick_notes)
+add_event(rim, rim_notes)
+add_event(hat, hat_notes)
 
-# print(event_list)
+# Function to play all the events
+def player(events):
+    start_time = time.time()
+    playing : bool = True
+    i = 0
+    while playing:
+        t = time.time() - start_time
+        if t > events[i]["ts"]:
+            events[i]["instrument"].play()
+            i += 1
+        if i == len(event_list):
+            playing = False
 
-def handle_note_event(event):
-    event['instrument'].play()
+print(f"event_list: {event_list}")
 
-# handle_note_event(kick_event)
-# handle_note_event(hihat_event)
-for event in event_list:
-    print(event['name'], event['ts'])
-    handle_note_event(event)
+# Sort all dicts in the event list
+event_list = sorted(event_list, key=lambda d: d['ts']) 
 
+# Insert the function
+player(event_list)
 
-
-time.sleep(2)
-
+# Wacht totdat alle samples gespeeld zijn.
+time.sleep(1)
