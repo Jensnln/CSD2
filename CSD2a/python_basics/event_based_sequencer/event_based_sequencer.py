@@ -11,9 +11,9 @@ hat = sa.WaveObject.from_wave_file("assets/hihat.wav")
 bpm = 120
 
 # Make the note lists
-kick_notes = [1, 1, 1, 1, 1, 1, 1, 1]
-rim_notes = [2, 2, 2, 2]
-hat_notes = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+kick_notes = [1, 1, 1, 1]
+rim_notes = [2, 2]
+hat_notes = [0.25, 0.5, 0.25, 0.5, 0.25, 0.5, 0.25, 0.5, 0.25, 0.5, 0.25]
 
 # Function to calculate durations to 16th stamps
 def note_to_dur(src):
@@ -23,7 +23,7 @@ def note_to_dur(src):
         dur = src[i] * 4
         dur = dur * (60 / bpm /4)
         dst[i + 1] = dst[i] + dur
-    dst.pop(0)
+    dst.pop()
     return dst
 
 # Insert the notes to dur function
@@ -62,8 +62,7 @@ def player(events):
             i += 1
         if i == len(event_list):
             playing = False
-
-print(f"event_list: {event_list}")
+        time.sleep(0.0001)
 
 # Sort all dicts in the event list
 event_list = sorted(event_list, key=lambda d: d['ts']) 
