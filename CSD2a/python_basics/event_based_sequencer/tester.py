@@ -1,6 +1,7 @@
 # Import modules
 import time
 import simpleaudio as sa
+import threading
 
 # Declare sample file paths
 kick = sa.WaveObject.from_wave_file("assets/kick.wav")
@@ -11,9 +12,9 @@ hat = sa.WaveObject.from_wave_file("assets/hihat.wav")
 bpm = 120
 
 # Make the note lists
-kick_notes = [1, 1, 1, 1, 1, 1, 1, 1]
-rim_notes = [2, 2, 2, 2]
-hat_notes = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+kick_notes = [1, 1, 1, 1]
+rim_notes = [2, 2]
+hat_notes = [0.25, 0.5, 0.25, 0.5, 0.25, 0.5, 0.25, 0.5, 0.25, 0.5, 0.25]
 
 # Function to calculate durations to 16th stamps
 def note_to_dur(src):
@@ -23,7 +24,7 @@ def note_to_dur(src):
         dur = src[i] * 4
         dur = dur * (60 / bpm /4)
         dst[i + 1] = dst[i] + dur
-    dst.pop(0)
+    dst.pop()
     return dst
 
 # Insert the notes to dur function
@@ -51,25 +52,37 @@ add_event(rim, rim_notes)
 add_event(hat, hat_notes)
 
 # Function to play all the events
-def player(events):
+def player(events, is_playing):
     start_time = time.time()
     playing : bool = True
     i = 0
+    playing = is_playing
     while playing:
+        playing = is_playing
         t = time.time() - start_time
         if t > events[i]["ts"]:
             events[i]["instrument"].play()
             i += 1
         if i == len(event_list):
-            playing = False
-
-print(f"event_list: {event_list}")
+            i = 0
+            start_time = time.time()
+            # playing = False
+        time.sleep(0.0001)
 
 # Sort all dicts in the event list
 event_list = sorted(event_list, key=lambda d: d['ts']) 
 
+is_playing = True
+
 # Insert the function
-player(event_list)
+t = threading.Thread(target=player, args=(event_list, is_playing))
+t.start()
+
+key_input = input("Press 'x' to stop sequence: ", )
+if key_input in ("x", "X"):
+    is_playing = False
+    t.join()
+
 
 # Wacht totdat alle samples gespeeld zijn.
 time.sleep(1)
