@@ -8,7 +8,35 @@ rim = sa.WaveObject.from_wave_file("assets/rim.wav")
 hat = sa.WaveObject.from_wave_file("assets/hihat.wav")
 
 # Declare variables
+correct_input = False
+correct_bpm = False
 bpm = 120
+
+#Ask bpm
+
+while not correct_input:
+    change_default_bpm = input("Default bpm = 120. Want to adjust? [y/n]: ", )
+
+    if change_default_bpm in ("Y", "y"):
+        while (not correct_bpm):
+            user_bpm = input("Enter bpm: ", )
+            if not user_bpm:
+                correct_bpm = True
+            else:
+                try:
+                    bpm = float(user_bpm)
+                    correct_bpm = True
+                    break
+                except:
+                    print("Incorrect bpm. Try again:. ")
+        print("bpm is: ", bpm)
+        correct_input = True               
+    elif change_default_bpm in ("N", "n"):
+        print(f"Ok. Bpm is still {bpm}. " )
+        correct_input = True
+    else:
+        print("Incorrect input. Try again. ")
+        correct_input = False
 
 # Make the note lists
 kick_notes = [1, 1, 1, 1]
@@ -62,7 +90,11 @@ def player(events):
             i += 1
         if i == len(event_list):
             playing = False
-        time.sleep(0.0001)
+            i = 0
+            start_time = time.time()
+            t = time.time() - start_time
+
+        time.sleep(0.001)
 
 # Sort all dicts in the event list
 event_list = sorted(event_list, key=lambda d: d['ts']) 
