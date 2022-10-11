@@ -10,10 +10,9 @@ hat = sa.WaveObject.from_wave_file("assets/hihat.wav")
 # Declare variables
 correct_input = False
 correct_bpm = False
-bpm = 120
+bpm = 120.0
 
 #Ask bpm
-
 while not correct_input:
     change_default_bpm = input("Default bpm = 120. Want to adjust? [y/n]: ", )
 

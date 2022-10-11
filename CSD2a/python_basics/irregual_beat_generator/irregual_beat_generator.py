@@ -1,7 +1,6 @@
 # Import modules
 import time
 import simpleaudio as sa
-import threading
 
 # Declare sample file paths
 kick = sa.WaveObject.from_wave_file("assets/kick.wav")
@@ -9,7 +8,34 @@ rim = sa.WaveObject.from_wave_file("assets/rim.wav")
 hat = sa.WaveObject.from_wave_file("assets/hihat.wav")
 
 # Declare variables
-bpm = 120
+correct_input = False
+correct_bpm = False
+bpm = 120.0
+
+#Ask bpm
+while not correct_input:
+    change_default_bpm = input("Default bpm = 120. Want to adjust? [y/n]: ", )
+
+    if change_default_bpm in ("Y", "y"):
+        while (not correct_bpm):
+            user_bpm = input("Enter bpm: ", )
+            if not user_bpm:
+                correct_bpm = True
+            else:
+                try:
+                    bpm = float(user_bpm)
+                    correct_bpm = True
+                    break
+                except:
+                    print("Incorrect bpm. Try again:. ")
+        print("bpm is: ", bpm)
+        correct_input = True               
+    elif change_default_bpm in ("N", "n"):
+        print(f"Ok. Bpm is still {bpm}. " )
+        correct_input = True
+    else:
+        print("Incorrect input. Try again. ")
+        correct_input = False
 
 # Make the note lists
 kick_notes = [1, 1, 1, 1]
@@ -52,37 +78,28 @@ add_event(rim, rim_notes)
 add_event(hat, hat_notes)
 
 # Function to play all the events
-def player(events, is_playing):
+def player(events):
     start_time = time.time()
     playing : bool = True
     i = 0
-    playing = is_playing
     while playing:
-        playing = is_playing
         t = time.time() - start_time
         if t > events[i]["ts"]:
             events[i]["instrument"].play()
             i += 1
         if i == len(event_list):
+            playing = False
             i = 0
             start_time = time.time()
-            # playing = False
-        time.sleep(0.0001)
+            t = time.time() - start_time
+
+        time.sleep(0.001)
 
 # Sort all dicts in the event list
 event_list = sorted(event_list, key=lambda d: d['ts']) 
 
-is_playing = True
-
 # Insert the function
-t = threading.Thread(target=player, args=(event_list, is_playing))
-t.start()
-
-key_input = input("Press 'x' to stop sequence: ", )
-if key_input in ("x", "X"):
-    is_playing = False
-    t.join()
-
+player(event_list)
 
 # Wacht totdat alle samples gespeeld zijn.
 time.sleep(1)
