@@ -33,7 +33,7 @@ def durations(string, bpm, measures):
     dur = 4 / step_amount
     # Add all the possible steps with the same duration.
     for i in range(total_step_amount):
-        notes.append(dur)
+        notes.append(round(dur, 4))
 
     # Double for loop to generate a new sequence for the amount of measures
     for i in range(measures):
