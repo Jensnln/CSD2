@@ -28,8 +28,8 @@ measures = ql.ask('int', 'How many measures would you like to generate?', {'min'
 
 # Make the note lists
 kick_notes = gn.durations('kick', bpm, measures)
-# rim_notes = gn.durations('rim', bpm, measures)
-# hat_notes = gn.durations('hat', bpm, measures)
+rim_notes = gn.durations('rim', bpm, measures)
+hat_notes = gn.durations('hat', bpm, measures)
 
 # print(f'Kick_notes: {kick_notes}\nRim_notes: {rim_notes}\nHat_notes: {hat_notes}')
 
@@ -47,8 +47,8 @@ def add_event(instrument, ts):
 
 # Insert the function
 add_event(kick, kick_notes)
-# add_event(rim, rim_notes)
-# add_event(hat, hat_notes)
+add_event(rim, rim_notes)
+add_event(hat, hat_notes)
 
 # Function to play all the events
 def player(events):

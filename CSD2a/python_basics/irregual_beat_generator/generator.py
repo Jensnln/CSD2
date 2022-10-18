@@ -1,8 +1,6 @@
 import random
 import question_line as ql
 
-measures = ql.ask('int', 'How many measures do you want to generate?', {'min':0})
-
 # Function to calculate timestamps from durations.
 def timestamps(durations, bpm):
     time_stamps = []
@@ -70,5 +68,3 @@ def durations(string, bpm, measures):
     # Call the next function to calculate the timestamps.
     print(f'{string} durations: {notes}')
     return timestamps(notes, bpm)
-
-kick_notes = durations('kick', 120, measures)
