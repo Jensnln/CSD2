@@ -2,8 +2,13 @@
 import time
 import simpleaudio as sa
 import question_line as ql
+import generator as gn
 
 # Declare sample file paths
+samples = [
+
+]
+
 kick = sa.WaveObject.from_wave_file("assets/kick.wav")
 rim = sa.WaveObject.from_wave_file("assets/rim.wav")
 hat = sa.WaveObject.from_wave_file("assets/hihat.wav")
@@ -11,37 +16,23 @@ hat = sa.WaveObject.from_wave_file("assets/hihat.wav")
 # Declare variables
 bpm = 120.0
 
+# Ask amount of measures
+measures = ql.ask('int', 'How many measures would you like to generate?', {'min': 0})
+
 #Ask bpm
-bpm_ask = ql.ask("bool", "\nThe default bpm is 120. \nDo you wish to change it?")
-print(f"bpm_ask: {bpm_ask}")
-if (bpm_ask == 1):
-    bpm = ql.ask("int", "\nWhat would you like the bpm to be?")
-    print(f"Bpm is now {bpm}")
+# bpm_ask = ql.ask("bool", "\nThe default bpm is 120. \nDo you wish to change it?")
+# if (bpm_ask == 1):
+#     bpm = ql.ask("float", "\nWhat would you like the bpm to be?")
+#     print(f"Bpm is now {bpm}")
 
 
 # Make the note lists
-kick_notes = [1, 1, 1, 1]
-rim_notes = [2, 2]
-hat_notes = [0.25, 0.5, 0.25, 0.5, 0.25, 0.5, 0.25, 0.5, 0.25, 0.5, 0.25]
+kick_notes = gn.durations('kick', bpm, measures)
+# rim_notes = gn.durations('rim', bpm, measures)
+# hat_notes = gn.durations('hat', bpm, measures)
 
-# Function to calculate durations to 16th stamps
-def note_to_dur(src):
-    dst = list(range(len(src)))
-    dst.insert(0,0)
-    for i in range(len(src)):
-        dur = src[i] * 4
-        dur = dur * (60 / bpm /4)
-        dst[i + 1] = dst[i] + dur
-    dst.pop()
-    return dst
+# print(f'Kick_notes: {kick_notes}\nRim_notes: {rim_notes}\nHat_notes: {hat_notes}')
 
-# Insert the notes to dur function
-kick_notes = note_to_dur(kick_notes)
-rim_notes = note_to_dur(rim_notes)
-hat_notes = note_to_dur(hat_notes)
-print(f"kick_notes: {kick_notes}")
-print(f"rim_notes: {rim_notes}")
-print(f"hat_notes: {hat_notes}")
 
 # Event list
 event_list = []
@@ -56,8 +47,8 @@ def add_event(instrument, ts):
 
 # Insert the function
 add_event(kick, kick_notes)
-add_event(rim, rim_notes)
-add_event(hat, hat_notes)
+# add_event(rim, rim_notes)
+# add_event(hat, hat_notes)
 
 # Function to play all the events
 def player(events):
@@ -81,7 +72,7 @@ def player(events):
 event_list = sorted(event_list, key=lambda d: d['ts']) 
 
 # Insert the function
-# player(event_list)
+player(event_list)
 
 # Wacht totdat alle samples gespeeld zijn.
 time.sleep(1)

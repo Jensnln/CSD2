@@ -21,7 +21,7 @@ def ask(type: str, question_string: str, options: dict = {}):
         _type_: str
     """
     # Print the question
-    print(f'\n{question_string}')
+    print(question_string)
 
     # Ask the question
     result = input('> ')
@@ -78,7 +78,7 @@ def ask(type: str, question_string: str, options: dict = {}):
                       str(options['max']) + '.')
                 raise ValueError
         except:
-            print('Please enter a valid number.')
+            print('Please enter a valid number.\n')
             return ask(type, question_string, options)
     elif type == 'float':
         try:
@@ -92,7 +92,7 @@ def ask(type: str, question_string: str, options: dict = {}):
                         str(options['max']) + '.')
                 raise ValueError
         except:
-            print('Please enter a valid number')
+            print('Please enter a valid number\n')
             return ask(type, question_string, options)
     # Return the result
     # print(f'Result in ask(): {result}')
