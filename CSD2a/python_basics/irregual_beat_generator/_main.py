@@ -1,8 +1,8 @@
 # Import modules
 import time
-import simpleaudio as sa
-import question_line as ql
-import generator as gn
+import simpleaudio      as sa
+import question_line    as ql
+import generator        as gn
 
 # Declare sample file paths
 samples = [
@@ -16,15 +16,14 @@ hat = sa.WaveObject.from_wave_file("assets/hihat.wav")
 # Declare variables
 bpm = 120.0
 
+#Ask bpm
+bpm_ask = ql.ask("bool", "\nThe default bpm is 120. \nDo you wish to change it? [y/n]")
+if (bpm_ask == 1):
+    bpm = ql.ask("float", "\nWhat would you like the bpm to be?")
+    print(f"Bpm is now {bpm}")
+
 # Ask amount of measures
 measures = ql.ask('int', 'How many measures would you like to generate?', {'min': 0})
-
-#Ask bpm
-# bpm_ask = ql.ask("bool", "\nThe default bpm is 120. \nDo you wish to change it?")
-# if (bpm_ask == 1):
-#     bpm = ql.ask("float", "\nWhat would you like the bpm to be?")
-#     print(f"Bpm is now {bpm}")
-
 
 # Make the note lists
 kick_notes = gn.durations('kick', bpm, measures)
@@ -76,3 +75,9 @@ player(event_list)
 
 # Wacht totdat alle samples gespeeld zijn.
 time.sleep(1)
+
+# --- To Do --- 
+# Export to midi.
+# Put all samples in list with dict.
+# Upgrade UI
+# Add more option for generation.

@@ -33,10 +33,42 @@ def durations(string, bpm, measures):
     
     # Divide "1" by the amount of steps played to get all equal durations.
     dur = 4 / step_amount
-    # Add all the possible steps with the same duration.
-    for i in range(total_step_amount):
-        notes.append(dur)
 
+
+    for i in range(measures):
+        temp_list = []
+
+        for j in range(step_amount):
+            temp_list.append(round(dur, 3))
+        # print(f'temp_list pre pop: {temp_list}')
+
+        for k in range(muted):
+
+            rand_value = random.randint(0, len(temp_list) - 2)
+            # print(f'k: {k} | rand_value: {rand_value} | step_amount: {step_amount}')
+            if rand_value == len(temp_list):
+
+
+                temp_list[rand_value - 1] += temp_list[rand_value]
+                temp_list.pop(rand_value)
+            elif rand_value < len(temp_list):
+                
+                temp_list[rand_value + 1] += temp_list[rand_value]
+                temp_list.pop(rand_value)
+        
+        print(f'temp_list post pop: {temp_list}\n')
+        
+        for l in range(len(temp_list)):
+            notes.append(temp_list[l])
+    print(f'notes: {notes}')
+
+        
+    # Call the next function to calculate the timestamps.
+    # print(f'{string} durations: {notes}')
+    return timestamps(notes, bpm)            
+
+
+"""
     # Double for loop to generate a new sequence for the amount of measures
     for i in range(measures):
 
@@ -66,9 +98,8 @@ def durations(string, bpm, measures):
                 notes[r - 1] += notes[r]
                 notes.pop(r)
                 # print(f'notes post: {notes}')
+"""
     
-    # Call the next function to calculate the timestamps.
-    print(f'{string} durations: {notes}')
-    return timestamps(notes, bpm)
+
 
 kick_notes = durations('kick', 120, measures)

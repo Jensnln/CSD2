@@ -7,6 +7,25 @@ def typingPrint(text):
     sys.stdout.flush()
     time.sleep(0.03)
 
+def typingPrintfast(text):
+
+  for character in text:
+    sys.stdout.write(character)
+    sys.stdout.flush()
+    time.sleep(0.002)
+
+typingPrint("Welcome to the: \n")
+time.sleep(0.1)
+
+typingPrintfast("""\
+  _____                           _              _                _                                     _             
+  \_   \_ __ _ __ ___  __ _ _   _| | __ _ _ __  | |__   ___  __ _| |_    __ _  ___ _ __   ___ _ __ __ _| |_ ___  _ __ 
+   / /\/ '__| '__/ _ \/ _` | | | | |/ _` | '__| | '_ \ / _ \/ _` | __|  / _` |/ _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__|
+/\/ /_ | |  | | |  __/ (_| | |_| | | (_| | |    | |_) |  __/ (_| | |_  | (_| |  __/ | | |  __/ | | (_| | || (_) | |   
+\____/ |_|  |_|  \___|\__, |\__,_|_|\__,_|_|    |_.__/ \___|\__,_|\__|  \__, |\___|_| |_|\___|_|  \__,_|\__\___/|_|   
+                      |___/                                             |___/                                         
+                   \n""")
+time.sleep(1)
 
 # Function to ask questions.
 def ask(type: str, question_string: str, options: dict = {}):
@@ -24,7 +43,7 @@ def ask(type: str, question_string: str, options: dict = {}):
     print(f'\n{question_string}')
 
     # Ask the question
-    result = input('> ')
+    result = input('\n> ')
 
     # Check if the requested type is a string
     if type == 'string':
@@ -103,7 +122,7 @@ def ask(type: str, question_string: str, options: dict = {}):
 
 # Check if the file is run directly (through `python3 askQuestion.py`)
 if __name__ == '__main__':
-    typingPrint("Hey, you are not running the correct file.")
+    print("Hey, you are not running the correct file.")
 # Else the file is imported, print a message
 else:
     print("You got a module. ")
