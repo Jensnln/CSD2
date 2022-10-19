@@ -8,7 +8,7 @@ def timestamps(durations, bpm):
     sum = 0
 
     for i in durations:
-        time_stamps.append(sum)
+        time_stamps.append(round(sum, 3))
         sum += i * multiplier
 
     return time_stamps
@@ -26,7 +26,6 @@ def durations(string, bpm, measures):
     muted = step_amount - active
 
 
-        
     # print(f'Amount: {step_amount} | Active: {active} | Muted: {muted}')
     
     # Divide "1" by the amount of steps played to get all equal durations.
@@ -64,7 +63,9 @@ def durations(string, bpm, measures):
                 notes[r - 1] += notes[r]
                 notes.pop(r)
                 # print(f'notes post: {notes}')
-    
+            
     # Call the next function to calculate the timestamps.
-    print(f'{string} durations: {notes}')
+    # print(f'{string} durations: {notes}')
+    print(notes)
     return timestamps(notes, bpm)
+

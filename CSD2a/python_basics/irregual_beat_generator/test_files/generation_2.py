@@ -10,7 +10,7 @@ def timestamps(durations, bpm):
     sum = 0
 
     for i in durations:
-        time_stamps.append(sum)
+        time_stamps.append(round(sum, 4))
         sum += i * multiplier
 
     return time_stamps
@@ -60,7 +60,8 @@ def durations(string, bpm, measures):
         
         for l in range(len(temp_list)):
             notes.append(temp_list[l])
-    print(f'notes: {notes}')
+            
+    print(f'notes: {notes}\n length{len(notes)}')
 
         
     # Call the next function to calculate the timestamps.
@@ -68,38 +69,5 @@ def durations(string, bpm, measures):
     return timestamps(notes, bpm)            
 
 
-"""
-    # Double for loop to generate a new sequence for the amount of measures
-    for i in range(measures):
-
-        for j in range(muted):
-            # print(f'Measure: {i} | Note: {j}')
-
-            # p = starting index of each measure (notes[i]). 
-            # Min value of the random range. Index of the start of the current measure.
-            p = (i * active)
-
-            # Max value of the random range. Amount of notes left in the current measure.
-            q = (p + step_amount - j - 2)
-
-            # Generate a random value that corresponds with an index of the current measure.
-            r = random.randint(p, q)
-            # print(f'min: {p} \nmax:{q}\nq: {r}')
-
-            # If r is smaller then the amount of active notes (notes left in the measure), it will add its duration to the next note and delete itself. 
-            # If not it will add tis value to the previous note.
-
-            if r < (p + active):
-                notes[r + 1] += notes[r]
-                notes.pop(r)
-            else:
-                # print(f'its happening: | q: {r} | min: {p} | max: {q} | j: {j} | i: {i} | p + active: {p + active}')
-                # print(f'notes pre: {notes}')
-                notes[r - 1] += notes[r]
-                notes.pop(r)
-                # print(f'notes post: {notes}')
-"""
-    
-
-
 kick_notes = durations('kick', 120, measures)
+print(f'kick_notes: {kick_notes}\n length{len(kick_notes)}')
