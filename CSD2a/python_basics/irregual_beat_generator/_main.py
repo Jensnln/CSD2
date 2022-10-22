@@ -1,80 +1,92 @@
 # Import modules
 import time
+from pkg_resources import safe_name
 import simpleaudio      as sa
 import question_line    as ql
-import generator        as gn
+import generator        as gen
+import midi_file_generator as mfgen
 
 # Declare sample file paths
-samples = [
+samples = {
+    'kick': sa.WaveObject.from_wave_file("assets/kick.wav"),
+    'rim' : sa.WaveObject.from_wave_file("assets/rim.wav"),
+    'hat' : sa.WaveObject.from_wave_file('assets/hihat.wav')
+}
 
-]
-
-kick = sa.WaveObject.from_wave_file("assets/kick.wav")
-rim = sa.WaveObject.from_wave_file("assets/rim.wav")
-hat = sa.WaveObject.from_wave_file("assets/hihat.wav")
 
 # Declare variables
-bpm = 120.0
+bpm = 120
 
-#Ask bpm
-bpm_ask = ql.ask("bool", "\nThe default bpm is 120. \nDo you wish to change it? [y/n]")
-if (bpm_ask == 1):
-    bpm = ql.ask("float", "\nWhat would you like the bpm to be?")
-    print(f"Bpm is now {bpm}")
-
-# Ask amount of measures
+# Amount of measurs
 measures = ql.ask('int', 'How many measures would you like to generate?', {'min': 0})
 
-# Make the note lists
-kick_notes = gn.durations('kick', bpm, measures)
-rim_notes = gn.durations('rim', bpm, measures)
-hat_notes = gn.durations('hat', bpm, measures)
-
-# print(f'Kick_notes: {kick_notes}\nRim_notes: {rim_notes}\nHat_notes: {hat_notes}')
-
-
-# Event list
 event_list = []
 
-# Function to add the _notes list as dicts to the event_list
-def add_event(instrument, ts):
-    for i in range(len(ts)):
-        temp_key = {}
-        temp_key["instrument"] = instrument
-        temp_key["ts"] = ts[i]
-        event_list.append(temp_key)
 
-# Insert the function
-add_event(kick, kick_notes)
-add_event(rim, rim_notes)
-add_event(hat, hat_notes)
+for key in samples.keys():
+    gen.event_maker(key, bpm, measures, event_list)
 
-# Function to play all the events
+# print(f'event_list: {event_list}')
+
+
+
+
+# Function to play all the events.
 def player(events):
+    # Set start time of the player to current time.
     start_time = time.time()
+    # Make a boolean to determine if the player is playing.
     playing : bool = True
+    # Counter for all the timestamps.
     i = 0
     while playing:
+        # Calculate current time.
         t = time.time() - start_time
+        # Check if the time is greater than the current time stamp.
         if t > events[i]["ts"]:
-            events[i]["instrument"].play()
+            # If so play the corresponding sample in the sample dict.
+            instrument = events[i]['inst']
+            samples[instrument].play()
+            # Go the the next timestamp.
             i += 1
+        # Check if the time stamp counter is equal to the length of the event list (all the timestamps).
         if i == len(event_list):
+            # If so break the while loop and reset all the start time and counter.
             playing = False
             i = 0
             start_time = time.time()
             t = time.time() - start_time
-
+        # Wait for the last sample to finnish playing.
         time.sleep(0.001)
 
-# Sort all dicts in the event list
+
+# Add all the time stamps to the event_list.
+
+
+# Sort all events in event list based on time stamps
 event_list = sorted(event_list, key=lambda d: d['ts']) 
 
-# Insert the function
+# Print all the events.
+for i in range(len(event_list)):
+    print(
+    'Event',[i],event_list[i]['inst'], 
+    'ts:',event_list[i]['ts'], 
+    'dur:',event_list[i]['dur'])
+
+# Play all the events.
 player(event_list)
 
-# Wacht totdat alle samples gespeeld zijn.
-time.sleep(1)
+export = ql.ask('bool', 'Do you want to save the sequence as midifile?')
+
+if export is True:
+    mfgen.midimaker(bpm, event_list)
+
+another_one  = ql.ask('bool', 'Would you like to generate another one?')
+if another_one is True:
+    measures = ql.ask('int', 'How many measures would you like to generate?', {'min': 0})
+    for key in samples.keys():
+        gen.event_maker(key, bpm, measures, event_list)
+
 
 # --- To Do --- 
 # Export to midi.

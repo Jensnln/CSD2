@@ -86,9 +86,10 @@ def event_adder(instrument, dur, ts, event_list_2):
         # Make a tempory dictionary to add to the event list.
         temp_dict = {}
         temp_dict['inst'] = instrument
-        temp_dict['ts'] = round(ts[i], 2)
-        temp_dict['dur'] = round(dur[i], 2)
+        temp_dict['ts'] = ts[i]
+        temp_dict['dur'] = dur[i]
         event_list_2.append(temp_dict)
+    return event_list_2
 
 
 
