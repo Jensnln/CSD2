@@ -24,11 +24,11 @@ while generating:
     if bpm_ask is False:
         bpm = ql.ask('float', 'Okay princes, if you want to be in charge. \nHow fast do you wanna go?', {'min' : 20, 'max' : 220})
         # ql.typingPrint(f'Not really my fist choice, but I changed the bpm to {bpm}.')
-        if bpm > 130:
+        if bpm >= 130:
             ql.typingPrint('Uhh okay, I guess its rave time.')
-        elif 100 < bpm < 130:
+        elif 100 <= bpm < 130:
             ql.typingPrint('I mean, if you think your beat will sound better that way.')
-        elif 70 < bpm < 100:
+        elif 70 <= bpm < 100:
             ql.typingPrint('Sure.')
         elif bpm < 70:
             ql.typingPrint('Okay granny, I have all day.')
