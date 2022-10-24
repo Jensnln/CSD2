@@ -1,12 +1,13 @@
 import time,os,sys
 
-# Funtion to print letter for letter.
+# Funtion to print letter for letter. Found online.
 def typingPrint(text):
   for character in text:
     sys.stdout.write(character)
     sys.stdout.flush()
     time.sleep(0.03)
 
+# Function to draw, same as before, but a little faster.
 def typingPrintfast(text):
 
   for character in text:
@@ -14,6 +15,7 @@ def typingPrintfast(text):
     sys.stdout.flush()
     time.sleep(0.002)
 
+# This function is from Jochem. Did some minor changes.
 # Function to ask questions.
 def ask(type: str, question_string: str, options: dict = {}):
     """Print a question and return the answer. The type and required options are specified in the parameters. If the answer is invalid, the question will be asked again.
