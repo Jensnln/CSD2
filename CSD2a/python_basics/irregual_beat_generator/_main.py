@@ -1,12 +1,12 @@
 # Import modules
 import time
-from pkg_resources import safe_name
 import simpleaudio      as sa
 import question_line    as ql
 import generator        as gen
 import midi_file_generator as mfgen
 
-another = ql.ask('bool', 'Would you like to start generating? [y/n]')
+# Welcome message.
+generating = ql.ask('bool', 'Finally... \nI have been waiting for you. \nShall we start generating a beat? [y/n]')
 
 # Declare sample file paths
 samples = {
@@ -16,54 +16,37 @@ samples = {
     'ohat' : sa.WaveObject.from_wave_file('assets/ohat.wav'),
 }
 
-while another:
+while generating:
     # Declare variables
-    bpm = 120
     event_list = []
-
-    bpm_ask = ql.ask('bool', f'The bpm is currently {bpm}, would you like to change that? [y/n]')
-    if bpm_ask is True:
-        bpm = ql.ask('float', 'Enter new bpm.')
-        print(f'The bpm is now {bpm}.')
+    bpm = 120
+    bpm_ask = ql.ask('bool', f'The bpm is currently {bpm}, is that something you feel comfortable with? [y/n]')
+    if bpm_ask is False:
+        bpm = ql.ask('float', 'Okay princes, if you want to be in charge. \nHow fast do you wanna go?', {'min' : 20, 'max' : 220})
+        # ql.typingPrint(f'Not really my fist choice, but I changed the bpm to {bpm}.')
+        if bpm > 130:
+            ql.typingPrint('Uhh okay, I guess its rave time.')
+        elif 100 < bpm < 130:
+            ql.typingPrint('I mean, if you think your beat will sound better that way.')
+        elif 70 < bpm < 100:
+            ql.typingPrint('Sure.')
+        elif bpm < 70:
+            ql.typingPrint('Okay granny, I have all day.')
     else:
-        print(f'Ok. The bpm is still {bpm}.')
+        ql.typingPrint(f'\nGood choice. The bpm is still {bpm}.')
 
     # Amount of measurs
-    measures = ql.ask('int', 'How many measures would you like to generate?', {'min': 0})
+    measures = ql.ask('int', '\nNow we have that out of the way, how many measures of pure awesomeness would you like me to generate?', {'min': 0})
+    if measures > 4:
+        ql.typingPrint('Oef.. This is gonna be awkward but you need the full version to generate more than 4 bars..\nEnter you credit card details below.')
+        time.sleep(1)
+        ql.typingPrint(f'\nJust kidding, {measures} measures it will be.')
 
+    # For each key (sample) in the sample dict, run all the generation algorithm in the generator.py file.
     for key in samples.keys():
         gen.event_maker(key, bpm, measures, event_list)
 
-    # Function to play all the events.
-    def player(events):
-        # Set start time of the player to current time.
-        start_time = time.time()
-        # Make a boolean to determine if the player is playing.
-        playing : bool = True
-        # Counter for all the timestamps.
-        i = 0
-        while playing:
-            # Calculate current time.
-            t = time.time() - start_time
-            # Check if the time is greater than the current time stamp.
-            if t > events[i]["ts"]:
-                # If so play the corresponding sample in the sample dict.
-                instrument = events[i]['inst']
-                samples[instrument].play()
-                # Go the the next timestamp.
-                i += 1
-            # Check if the time stamp counter is equal to the length of the event list (all the timestamps).
-            if i == len(event_list):
-                # If so break the while loop and reset all the start time and counter.
-                playing = False
-                i = 0
-                start_time = time.time()
-                t = time.time() - start_time
-            # Wait for the last sample to finnish playing.
-            time.sleep(0.001)
-
-
-    # Sort all events in event list based on time stamps
+    # Sort all events in event list based on time stamps.
     event_list = sorted(event_list, key=lambda d: d['ts']) 
 
     # Print all the events.
@@ -74,7 +57,7 @@ while another:
         'dur:',event_list[i]['dur'])
 
     # Play all the events.
-    player(event_list)
+    gen.player(event_list, samples)
 
     # Ask to export as midifile.
     export = ql.ask('bool', 'Do you want to save the sequence as midifile? [y/n]')
@@ -82,10 +65,7 @@ while another:
         mfgen.midimaker(bpm, event_list)
 
     # Ask to restart the program.
-    another = ql.ask('bool', 'Do you want to make anther one? [y/n]')
+    generating = ql.ask('bool', 'Do you want to make anther one? [y/n]')
 
-
-
-# --- To Do --- 
-# Upgrade UI
-# Add more option for generation.
+# Exit message.
+ql.typingPrint('Well... I guess this is goodbye then. \nBy the way, all your midi files are automatically being saved in the /midifiles folder.\nSee you next time.\n')

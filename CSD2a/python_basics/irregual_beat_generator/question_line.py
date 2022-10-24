@@ -14,21 +14,6 @@ def typingPrintfast(text):
     sys.stdout.flush()
     time.sleep(0.002)
 
-
-typingPrint("Welcome to the: \n")
-time.sleep(0.1)
-
-typingPrintfast("""\
-  _____                           _              _                _                                     _             
-  \_   \_ __ _ __ ___  __ _ _   _| | __ _ _ __  | |__   ___  __ _| |_    __ _  ___ _ __   ___ _ __ __ _| |_ ___  _ __ 
-   / /\/ '__| '__/ _ \/ _` | | | | |/ _` | '__| | '_ \ / _ \/ _` | __|  / _` |/ _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__|
-/\/ /_ | |  | | |  __/ (_| | |_| | | (_| | |    | |_) |  __/ (_| | |_  | (_| |  __/ | | |  __/ | | (_| | || (_) | |   
-\____/ |_|  |_|  \___|\__, |\__,_|_|\__,_|_|    |_.__/ \___|\__,_|\__|  \__, |\___|_| |_|\___|_|  \__,_|\__\___/|_|   
-                      |___/                                             |___/                                         
-                   \n""")
-time.sleep(1)
-
-
 # Function to ask questions.
 def ask(type: str, question_string: str, options: dict = {}):
     """Print a question and return the answer. The type and required options are specified in the parameters. If the answer is invalid, the question will be asked again.
@@ -42,7 +27,7 @@ def ask(type: str, question_string: str, options: dict = {}):
         _type_: str
     """
     # Print the question
-    print(f'\n{question_string}')
+    typingPrint(f'\n{question_string}')
 
     # Ask the question
     result = input('\n> ')
@@ -53,16 +38,16 @@ def ask(type: str, question_string: str, options: dict = {}):
 
         # Check if the answer is empty
         if 'allowEmpty' in options and options['allowEmpty'] == False and result == "":
-            print('Value cannot be empty.')
+            typingPrint('Value cannot be empty.')
             isError = True
         # Check if the answer is too long
         elif 'max' in options and len(result) > options['max']:
-            print('Value cannot be longer than ' + str(options['max']) + ' characters.')
+            typingPrint('Value cannot be longer than ' + str(options['max']) + ' characters.')
             isError = True
 
         # If there is an error, ask the question again
         if isError:
-            print('Please enter a valid option.')
+            typingPrint('Please enter a valid option.')
             return ask(type, question_string, options)
 
     # Check if the requested type is a boolean
@@ -78,7 +63,7 @@ def ask(type: str, question_string: str, options: dict = {}):
 
         # If there is an error, ask the question again
         if isError:
-            print('Please enter a valid option.')
+            typingPrint('Please enter a valid option.')
             return ask(type, question_string, options)
 
         # Check if the answer is yes
@@ -91,41 +76,44 @@ def ask(type: str, question_string: str, options: dict = {}):
             result = int(result)
             # Check if the answer is in bounds, throw an error if it is not
             if ('min' in options and result < options['min']):
-                print('Value cannot be smaller than ' +
+                typingPrint('Value cannot be smaller than ' +
                       str(options['min']) + '.')
                 raise ValueError
             if ('max' in options and result > options['max']):
-                print('Value cannot be larger than ' +
+                typingPrint('Value cannot be larger than ' +
                       str(options['max']) + '.')
                 raise ValueError
         except:
-            print('Please enter a valid number.')
+            typingPrint('Please enter a valid number.')
             return ask(type, question_string, options)
     elif type == 'float':
         try:
             result = float(result)
             if ('min' in options and result < options['min']):
-                print('Value cannot be smaller than ' +
+                typingPrint('Value cannot be smaller than ' +
                         str(options['min']) + '.')
                 raise ValueError
             if ('max' in options and result > options['max']):
-                print('Value cannot be larger than ' +
+                typingPrint('Value cannot be larger than ' +
                         str(options['max']) + '.')
                 raise ValueError
         except:
-            print('Please enter a valid number')
+            typingPrint('Please enter a valid number')
             return ask(type, question_string, options)
     # Return the result
     # print(f'Result in ask(): {result}')
     return result
 
+typingPrint("Welcome to the: \n")
+time.sleep(0.1)
 
+typingPrintfast("""\
+  _____                           _              _                _                                     _             
+  \_   \_ __ _ __ ___  __ _ _   _| | __ _ _ __  | |__   ___  __ _| |_    __ _  ___ _ __   ___ _ __ __ _| |_ ___  _ __ 
+   / /\/ '__| '__/ _ \/ _` | | | | |/ _` | '__| | '_ \ / _ \/ _` | __|  / _` |/ _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__|
+/\/ /_ | |  | | |  __/ (_| | |_| | | (_| | |    | |_) |  __/ (_| | |_  | (_| |  __/ | | |  __/ | | (_| | || (_) | |   
+\____/ |_|  |_|  \___|\__, |\__,_|_|\__,_|_|    |_.__/ \___|\__,_|\__|  \__, |\___|_| |_|\___|_|  \__,_|\__\___/|_|   
+                      |___/                                             |___/                                         
+                   \n""")
+time.sleep(1)
 
-"""
-# Check if the file is run directly (through `python3 askQuestion.py`)
-if __name__ == '__main__':
-    print("Hey, you are not running the correct file.")
-# Else the file is imported, print a message
-else:
-    print("You got a module. ")
-"""

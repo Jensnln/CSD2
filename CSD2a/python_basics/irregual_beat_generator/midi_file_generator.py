@@ -13,8 +13,8 @@ def midimaker(bpm, event_list):
     track = 0
     channel = 9
     
-    file_name = ql.ask('string', 'Insert file name: ')
-    print(f'filename: {file_name}')
+    file_name = ql.ask('string', 'What name did you have in mind?')
+    print(f'Filename: {file_name}')
     
     mf = MIDIFile(1)
     time_beginning = 0
