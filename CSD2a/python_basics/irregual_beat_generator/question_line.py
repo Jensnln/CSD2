@@ -14,7 +14,7 @@ def typingPrintfast(text):
     sys.stdout.flush()
     time.sleep(0.002)
 
-'''
+
 typingPrint("Welcome to the: \n")
 time.sleep(0.1)
 
@@ -27,7 +27,7 @@ typingPrintfast("""\
                       |___/                                             |___/                                         
                    \n""")
 time.sleep(1)
-'''
+
 
 # Function to ask questions.
 def ask(type: str, question_string: str, options: dict = {}):

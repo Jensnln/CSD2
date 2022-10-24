@@ -99,3 +99,5 @@ def event_maker(string, bpm, measures, event_list):
     _timestamps = timestamps(_durations, bpm)
     # print(_timestamps)
     event_adder(string, _durations, _timestamps, event_list)
+
+
