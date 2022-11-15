@@ -2,8 +2,8 @@
 
 class Instrument{
     public:
-        string ok;
-        
+        std::string ok;
+
 
 
     
