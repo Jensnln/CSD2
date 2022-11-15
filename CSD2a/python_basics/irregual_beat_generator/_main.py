@@ -36,7 +36,7 @@ while generating:
         ql.typingPrint(f'\nGood choice. The bpm is still {bpm}.')
 
     # Amount of measurs
-    measures = ql.ask('int', '\nNow we have that out of the way, how many measures of pure awesomeness would you like me to generate?', {'min': 0})
+    measures = ql.ask('int', '\nNow we have that out of the way, how many measures of pure awesomeness would you like me to generate?', {'min': 0, 'max' : 17})
     if measures > 4:
         ql.typingPrint('Oef.. This is gonna be awkward but you need the full version to generate more than 4 bars..\nEnter you credit card details below.')
         time.sleep(1)
