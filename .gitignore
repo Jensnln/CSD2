@@ -23,5 +23,5 @@ node_modules
 .vscode
 
 # Compiler files
-.o
-.s
+*.o
+*.s
