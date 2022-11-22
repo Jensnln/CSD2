@@ -5,8 +5,8 @@
 
 CC = g++
 CFLAGS = -Wall
-PROG = opdracht_1.jens
-SRC = main.cpp instruments/instrument.cpp
+PROG = zz.jens
+SRC = main.cpp ./instrument/instrument.cpp
 OBJS = main.o instrument.o
 
 $(PROG): $(OBJS)
