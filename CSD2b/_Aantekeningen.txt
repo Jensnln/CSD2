@@ -1,0 +1,39 @@
+Kopieer je .cpp class naar je .h en .o file
+Verwijder hierna alles wat je niet meer nodig hebt
+
+In .h : alleen maar de class (recept, welke functies en variabelen heb je)      = class
+In .cpp: #include de .h file, voer de functies uit met void .h:: function()     = class uitvoering
+In _main.cpp: #include de .h file, worden objecten aangemaakt (hoeveel van).    = main file die classes aanroept
+
+
+Eerst je .cpp file compileren tot een .o file
+Daarna je _main.cpp file compileren tot een .o file
+
+Vervolgens al je .o files compileren to een executable. = g++ -o "programma naam" + [.o] + [_main.o]
+
+Buildscript (bashscript) maken om dit proces te automatiseren opslaan als een .sh file:
+    g++ -c  .cpp
+    g++ -c _main.cpp
+    g++ -o "programmanaam" + [.o] + [_main.o]
+
+Nog geen permissies dus [chmod 755 .sh]
+
+
+Makefile:
+    Werkt met targets en sources, je werkt van van onder naar boven (zonder de clean file).
+    Waarom? Bij een Makefile compileer je niet iets wat al gecompileerd is. (Wel met als je een aanpassing maakt)
+
+    "programmanaam": [_main.o] + [.o]
+        g++ -o "programmanaam" + [_main.o] + [.o]
+
+    [_main.o]: [_main.cpp]
+        g++ -c [_main.cpp]
+
+    [.o]: .cpp
+        g++ -c [.cpp]
+
+
+    clean:
+        rm -f *.o [_main]
+
+Je kan deze file aanroepen met "make"
