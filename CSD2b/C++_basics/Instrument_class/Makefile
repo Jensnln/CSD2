@@ -5,7 +5,7 @@
 
 CC = g++
 CFLAGS = -Wall
-PROG = opdracht_1
+PROG = opdracht_1.jens
 SRC = main.cpp instruments/instrument.cpp
 OBJS = main.o instrument.o
 
