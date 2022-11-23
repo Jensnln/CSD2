@@ -3,17 +3,17 @@
 #
 # Marc_G 2012
 
-CC = g++
-CFLAGS = -Wall
+CXX = g++
+CXXFLAGS = -Wall
 PROG = zz.jens
-SRC = main.cpp ./instrument/instrument.cpp
+SRC = main.cpp instrument.cpp
 OBJS = main.o instrument.o
 
 $(PROG): $(OBJS)
-	$(CC) -o $@ $(OBJS)
+	$(CXX) -o $@ $(OBJS)
 
 .cpp.o:
-	$(CC) -c $< $(CFLAGS)
+	$(CXX) -c $< $(CXXFLAGS)
 
 clean:
 	/bin/rm -f $(PROG) $(OBJS)

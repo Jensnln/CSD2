@@ -1,9 +1,12 @@
 #include <iostream>
-#include "./instruments/instrument.h"
+#include "instrument.h"
 
 int main() 
 {
-    Instrument myInstrument;
-    myInstrument.print("Coole kikker.");
+    std::cout << "Inside main\n";
+    Instrument myInstrument("Ratatatata");
+    Instrument myInstrument_2("OOOEHH");
+    myInstrument_2.play();
+    myInstrument.play();
     return 0;
 }
