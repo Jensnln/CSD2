@@ -6,8 +6,8 @@
 CXX = g++
 CXXFLAGS = -Wall
 PROG = zz.jens
-SRC = main.cpp instrument.cpp
-OBJS = main.o instrument.o
+SRC = main.cpp instrument.cpp stringed.cpp woodwinds.cpp
+OBJS = main.o instrument.o stringed.o woodwinds.o
 
 $(PROG): $(OBJS)
 	$(CXX) -o $@ $(OBJS)

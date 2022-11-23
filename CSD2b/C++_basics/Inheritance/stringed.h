@@ -4,11 +4,10 @@ class Stringed : public Instrument
 {
 public:
     // Const / Destr
-    Stringed(std::string sound);
+    Stringed(std::string sound, float pitch);
     ~Stringed();
 
-    // // std::string sound;
     // // Methods
-    // void pluck();
-    // void strum();
+    void pluck(std::string pluckSound);
+    void strum(std::string strumSound);
 };

@@ -6,7 +6,7 @@ class Instrument
 {
 public:
     // Constr / Destr 
-    Instrument(std::string sound);
+    Instrument(std::string sound, float pitch);
     ~Instrument();
     
     // Methods
