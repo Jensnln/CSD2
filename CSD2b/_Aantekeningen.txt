@@ -37,3 +37,20 @@ Makefile:
         rm -f *.o [_main]
 
 Je kan deze file aanroepen met "make"
+
+
+Formula for sine waves:
+    y = sin(x * 2 pi * frequentie / samplerate)
+=   y = (t / samplerate) * 2pi * frequentie
+    if (t has range: [0 - 44100]):
+        phase = (t/samplerate);
+    with frequecy:
+        phase = ((t * frequency) / samplerate)
+
+    phase_step = (frequency / samplerate) // Where you are in the phase while looking at the samplerate
+    
+
+
+
+
+    y=\sin\left(\frac{\left(x\cdot2\pi\cdot100\right)}{44100}\right)
