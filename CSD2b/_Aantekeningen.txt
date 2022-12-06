@@ -54,3 +54,8 @@ Formula for sine waves:
 
 
     y=\sin\left(\frac{\left(x\cdot2\pi\cdot100\right)}{44100}\right)
+
+
+Pointers:
+    char = 1 byte
+    
