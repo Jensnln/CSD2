@@ -2,9 +2,9 @@
 #define CALLBACK_H
 
 #include "jack_module.h"
-#include "sine.h"
-#include "square.h"
-#include "saw.h"
+#include "addSynth.h"
+#include "superSaw.h"
+#include "PWMSynth.h"
 
 class CustomCallback : public AudioCallback {
 public:
@@ -12,8 +12,10 @@ public:
   void process(AudioBuffer buffer) override;
 private:
   float samplerate = 44100;
-  Sine sine = Sine();
-
+//  Sine sine = Sine();
+    addSynth synth1 = addSynth(1);
+    superSaw sawSynth = superSaw(2);
+    PWMSynth pwmSynth = PWMSynth(0);
 };
 
 #endif //CALLBACK_H
