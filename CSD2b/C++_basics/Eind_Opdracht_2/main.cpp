@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
   audioToFile.write(callback);
 #else
 
-  jackModule.init(0, 1);
+  jackModule.init(0, 2);
 
   bool running = true;
   while (running) {

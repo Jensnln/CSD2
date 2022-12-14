@@ -13,8 +13,8 @@ public:
 private:
   float samplerate = 44100;
 //  Sine sine = Sine();
-    addSynth synth1 = addSynth(1);
-    superSaw sawSynth = superSaw(2);
+    addSynth synth1 = addSynth(40);
+    superSaw sawSynth = superSaw(0);
     PWMSynth pwmSynth = PWMSynth(0);
 };
 

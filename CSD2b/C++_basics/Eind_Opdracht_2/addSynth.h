@@ -29,7 +29,7 @@ public:
 protected:
         int oscNum;
 //        Oscillator* oscBank = new Sine[oscNum];
-        Oscillator* oscBank = new Saw[oscNum];
+        Oscillator* oscBank = new Sine[oscNum];
 };
 
 #endif //CSD_ADDSYNTH_H
