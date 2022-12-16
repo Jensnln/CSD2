@@ -1,15 +1,14 @@
 #pragma once
 #include <iostream>
 #include "oscillator.h"
-
 class Saw : public Oscillator
 {
 public:
-    Saw(float frequency = 220, float samplerate = 44100);
+    Saw();
+    Saw(float frequency);
     ~Saw();
 
     void calculate();
-    void phaseCancel();
 
 
 protected:

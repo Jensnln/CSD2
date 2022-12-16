@@ -2,37 +2,41 @@
 // Created by Jens on 14/12/2022.
 //
 
-#include "PWMSynth.h"
+#include "addSynth.h"
+#include "sine.h"
 
-
-PWMSynth::PWMSynth(int oscNum) : oscNum(oscNum){
+addSynth::addSynth(int oscNum) : oscNum(oscNum){
 //    this->oscNum = oscNum; // Why does this not work?
-    std::cout << "Inside PWMSynth()\n";
-}
-
-PWMSynth::~PWMSynth() {
-    std::cout << "Inside ~PWMSynth()\n";
+    std::cout << "Inside addSynth()\n";
 
 }
 
-void PWMSynth::tick() {
+addSynth::~addSynth() {
+    std::cout << "Inside ~addSynth()\n";
+
+}
+
+void addSynth::tick() {
     for(int i=0; i<oscNum; i++){
         oscBank[i].tick();
     }
 }
 
 //  Function to get all the sample values from the oscillators in the oscBank.
-float PWMSynth::getSample() {
-    float PWMSynthSample = 0;
+float addSynth::getSample() {
+    float addSynthSample = 0;
     for(int i=0; i<oscNum; i++){
-        PWMSynthSample += oscBank[i].getSample();
+        addSynthSample +=
+                oscBank[i].getSample();
     }
 
-    return  PWMSynthSample;
+
+    return  addSynthSample;
 }
 
 //  Function to set all the oscillator frequency values in the oscBank.
-void PWMSynth::setOscFrequency(float fundamental) {
+void addSynth::setOscFrequency(float fundamental) {
+
     for (int i = 0; i < oscNum; i++){
         oscBank[i].setFrequency((fundamental * i) + fundamental);
     }

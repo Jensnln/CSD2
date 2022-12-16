@@ -1,32 +1,34 @@
-#pragma once
+#ifndef _Oscillator_H_
+#define _Oscillator_H_
 #include <iostream>
-#include "oscillator.h"
 
-class Oscillator 
+class Oscillator
 {
 public:
-//    Oscillator();
-    Oscillator();
-    Oscillator(float frequency);
-    ~Oscillator();
+  Oscillator();
+  ~Oscillator();
 
 
 
-    // Set and Get
-    float getSample();
-    void tick();
-    void setSampleRate(float sampleRate);
-    void setFrequency(float frequency);
+  float getSample();
+  void tick();
 
+  //getters and setters
+  void setFrequency(float frequency);
+  float getFrequency();
 
-
+	// allow to set samplerate after initialization
+	void setSamplerate(float samplerate);
 
 protected:
-    virtual void calculate() = 0;
-    float frequency = 0;
-    float sampleRate = 44100;
-    float sample = 0;
-    float phase = 0;
-    float amplitude = 1;
-
+  // abstract method calculate - needs to be overriden by subclasses
+  virtual void calculate() = 0;
+  float frequency = 220;
+  float amplitude = 0.2;
+  float phase = 0;
+  // sample contains the current sample
+  float sample = 0;
+  float samplerate = 44100;
 };
+
+#endif

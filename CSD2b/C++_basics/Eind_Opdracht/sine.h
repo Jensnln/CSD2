@@ -5,7 +5,8 @@
 class Sine : public Oscillator
 {
 public:
-    Sine(float frequency = 220, float samplerate = 44100);
+    Sine();
+    Sine(float frequency);
     ~Sine();
 
     void calculate();

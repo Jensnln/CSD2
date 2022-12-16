@@ -1,38 +1,47 @@
 //
-// Created by Jens on 14/12/2022.
+// Created by Jens on 16/12/2022.
 //
 
 #include "addSynth.h"
 
-addSynth::addSynth(int oscNum) : oscNum(oscNum){
-//    this->oscNum = oscNum; // Why does this not work?
-    std::cout << "Inside addSynth()\n";
+addSynth::addSynth(float fundamental) : Synth(fundamental) {
+	std::cout << "Inside addSynth()\n";
 }
 
 addSynth::~addSynth() {
-    std::cout << "Inside ~addSynth()\n";
-
+	std::cout << "Inside ~addSynth()\n";
 }
 
-void addSynth::tick() {
-    for(int i=0; i<oscNum; i++){
-        oscBank[i].tick();
-    }
+void addSynth::init(){
+
+//	Fill the oscBank with Sine objects.
+	for (int i = 0; i < sineAmount; i++){
+		oscBank[i] = new Sine;
+		std::cout << "New instance["<<i<<"]"<<std::endl;
+	}
+//	Fill the oscBank with Square objects.
+	for (int i = sineAmount; i < oscAmount; i++){
+		oscBank[i] = new Square;
+	}
+
+//	Set the frequency for all Sine objects.
+	for (int i = 0; i < sineAmount; i++){
+		oscBank[i]->setFrequency(fundamental + (fundamental * i));
+	}
+//	Set the frequency for all the Square objects.
+	for (int i = sineAmount; i < oscAmount; i++){
+		oscBank[i]->setFrequency(fundamental + (fundamental * (i - sineAmount)));
+	}
 }
 
-//  Function to get all the sample values from the oscillators in the oscBank.
-float addSynth::getSample() {
-    float addSynthSample = 0;
-    for(int i=0; i<oscNum; i++){
-        addSynthSample += oscBank[i].getSample();
-    }
+float Synth::getSample(){
+	float sampleVal = 0;
 
-    return  addSynthSample;
+	for (int i = 0; i < oscAmount; i++){
+		sampleVal+= oscBank[i]->getSample();
+		oscBank[i]->tick();
+	}
+
+	return sampleVal;
 }
 
-//  Function to set all the oscillator frequency values in the oscBank.
-void addSynth::setOscFrequency(float fundamental) {
-    for (int i = 0; i < oscNum; i++){
-        oscBank[i].setFrequency((fundamental * i) + fundamental);
-    }
-}

@@ -2,22 +2,18 @@
 // Created by Jens on 14/12/2022.
 //
 
-#ifndef CSD_PWMSYNTH_H
-#define CSD_PWMSYNTH_H
+#ifndef CSD_ADDSYNTH_H
+#define CSD_ADDSYNTH_H
 #include <iostream>
 #include "synth.h"
-#include "square.h"
+#include "saw.h"
+#include "sine.h"
 
-//
-// Created by Jens on 14/12/2022.
-//
-
-
-class PWMSynth : public Synth{
+class addSynth : public Synth{
 public:
 //    addSynth();
-    PWMSynth(int oscNum);
-    ~PWMSynth();
+    addSynth(int oscNum);
+    ~addSynth();
 
 //    Function to tick all oscillators
     void tick();
@@ -31,10 +27,9 @@ public:
 
 
 protected:
-    int oscNum;
+        int oscNum;
 //        Oscillator* oscBank = new Sine[oscNum];
-    Oscillator* oscBank = new Square[oscNum];
+        Oscillator* oscBank = new Sine[oscNum];
 };
 
-
-#endif //CSD_PWMSYNTH_H
+#endif //CSD_ADDSYNTH_H

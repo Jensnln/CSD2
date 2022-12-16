@@ -1,23 +1,18 @@
-#include <iostream>
+//
+// Created by Ciska Vriezenga on 06/12/2022.
+//
+
 #include "square.h"
+#include "math.h"
 
 Square::Square()
 {
-    std::cout << "Square - Constructor \n";
+  std::cout << "Square::Square constructor\n";
 }
 
-Square::Square(float frequency){
-    Oscillator::frequency = frequency;
-}
-
-Square::~Square()
-{
-    std::cout << "~Square - Destructor \n";
-}
-
-
-void Square::calculate()
-{
-    sample = amplitude;
-    if(phase > 0.5) sample *=-1.0f;
+void Square::calculate() {
+  sample = amplitude;
+  if(phase > 0.5) {
+    sample *=-1.0f;
+  }
 }

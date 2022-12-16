@@ -1,27 +1,15 @@
-#include <iostream>
+//
+// Created by Ciska Vriezenga on 06/12/2022.
+//
+
 #include "sine.h"
 #include "math.h"
 
-//Sine::Sine(){
-//    std::cout << "Inside Sine()\n";
-//}
-
 Sine::Sine()
 {
-    std::cout << "Sine - Constructor \n";
+  std::cout << "Sine::Sine constructor\n";
 }
 
-Sine::Sine(float frequency){
-    Oscillator::frequency = frequency;
-}
-
-Sine::~Sine()
-{
-    std::cout << "~Sine - Destructor \n";
-}
-
-
-void Sine::calculate()
-{
-    sample = sin(M_PI * 2 * phase) * amplitude;
+void Sine::calculate() {
+  sample = sin(M_PI * 2 * phase) * amplitude;
 }

@@ -1,12 +1,14 @@
 #include "oscillator.h"
-#include "math.h"
 
-Oscillator::Oscillator(float frequency, float samplerate) : frequency(frequency), samplerate(samplerate)
+
+Oscillator::Oscillator()
 {
-    sample = 0;
-    amplitude = 1.0;
-    phase = 0;
     std::cout << "Oscillator - Constructor \n";
+}
+
+Oscillator::Oscillator(float frequency) {
+    this->frequency = frequency;
+
 }
 
 Oscillator::~Oscillator()
@@ -16,7 +18,7 @@ Oscillator::~Oscillator()
 
 void Oscillator::tick()
 {
-    phase += frequency / samplerate;
+    phase += frequency / sampleRate;
 
     // Wrap phase
     if (phase > 1.0f) phase -= 1.0f;
@@ -29,8 +31,16 @@ float Oscillator::getSample()
     return sample;
 }
 
-void Oscillator::setSamplerate(float samplerate)
+void Oscillator::setSampleRate(float sampleRate)
 {
-    this-> samplerate = samplerate;
+    std::cout << "Inside setSampleRate()\n";
+    std::cout << "New sampleRate:" << sampleRate << "\n";
+    this-> sampleRate = sampleRate;
+}
+
+void Oscillator::setFrequency(float frequency) {
+    std::cout << "Inside setFrequency()\n";
+    this->frequency = frequency;
+    std::cout << "New frequency: " << frequency << std::endl;
 }
 

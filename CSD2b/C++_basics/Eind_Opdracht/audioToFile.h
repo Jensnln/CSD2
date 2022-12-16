@@ -1,7 +1,7 @@
 #include "callback.h"
 #include <fstream>
 #include <iostream>
-#include<memory>
+#include <memory>
 #include <sys/stat.h>
 
 class WriteToFile {

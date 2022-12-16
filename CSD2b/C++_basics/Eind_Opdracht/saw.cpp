@@ -2,9 +2,17 @@
 #include "saw.h"
 #include "math.h"
 
-Saw::Saw(float frequency, float samplerate) : Oscillator(frequency, samplerate)
+//Sine::Sine(){
+//    std::cout << "Inside Sine()\n";
+//}
+
+Saw::Saw()
 {
     std::cout << "Saw - Constructor \n";
+}
+
+Saw::Saw(float frequency){
+    Oscillator::frequency = frequency;
 }
 
 Saw::~Saw()
@@ -16,9 +24,4 @@ Saw::~Saw()
 void Saw::calculate()
 {
     sample = phase * 2 -1;
-}
-
-void Saw::phaseCancel()
-{
-    phase *= -1;
 }

@@ -1,17 +1,18 @@
-#pragma once
-#include <iostream>
+//
+// Created by Ciska Vriezenga on 06/12/2022.
+//
+
+#ifndef BLOK2B_SQUARE_H
+#define BLOK2B_SQUARE_H
+
 #include "oscillator.h"
 
-class Square : public Oscillator
-{
+class Square : public Oscillator{
 public:
-    Square();
-    Square(float frequency);
-    ~Square();
-
-    void calculate();
-
+  Square();
 
 protected:
-
+  void calculate();
 };
+
+#endif //BLOK2B_SQUARE_H

@@ -2,9 +2,17 @@
 #include "sine.h"
 #include "math.h"
 
-Sine::Sine(float frequency, float samplerate) : Oscillator(frequency, samplerate)
+//Sine::Sine(){
+//    std::cout << "Inside Sine()\n";
+//}
+
+Sine::Sine()
 {
     std::cout << "Sine - Constructor \n";
+}
+
+Sine::Sine(float frequency){
+    Oscillator::frequency = frequency;
 }
 
 Sine::~Sine()
