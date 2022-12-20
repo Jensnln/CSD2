@@ -16,10 +16,11 @@ public:
 	void init();
 	float getSample();
 	void question();
+
 //	Make a pointer that points to an oscillator pointer.
 //	Name that pointer oscBank
 //	Let it oscBank point to an array of oscillator pointers with the size of oscAmount.
-	Oscillator** oscBank;
+	Oscillator** oscBank[2];
 
 
 

@@ -18,7 +18,32 @@ void addSynth::init(){
 
 	oscAmount = sineAmount + squareAmount;
 
-	oscBank = new Oscillator* [oscAmount];
+
+
+//	For loops to fi
+	for (int i = 0; i < 3; i++){
+		oscBank = new Oscillator*;
+	}
+
+//	for (int i = 0; i < squareAmount; i++){
+//		oscBank[1] = new Oscillator* [squareAmount];
+//	}
+
+	for (int i = 0; i < sineAmount; i++){
+		oscBank[0][i] = new Sine;
+	}
+
+	for (int i = 0; i < squareAmount; i++){
+		oscBank[1][i] = new Square;
+	}
+
+
+
+
+
+
+
+//	oscBank = new Oscillator* [oscAmount];
 
 
 	std::cout
@@ -30,13 +55,16 @@ void addSynth::init(){
 		std::cout << oscBank[i] << std::endl;
 	}
 
+
+
+/*
 //	Fill the oscBank with Sine objects.
 	for (int i = 0; i < sineAmount; i++){
 		oscBank[i] = new Sine;
 		std::cout << "New instance["<<i<<"]"<<std::endl;
 	}
 //	Fill the oscBank with Square objects.
-	for (int i = sineAmount; i < oscAmount; i++){
+	for (int i = sineAmount+1; i < oscAmount; i++){
 		oscBank[i] = new Square;
 	}
 
@@ -48,15 +76,28 @@ void addSynth::init(){
 	for (int i = sineAmount; i < oscAmount; i++){
 		oscBank[i]->setFrequency(fundamental + (fundamental * (i - sineAmount)));
 	}
+
+ */
+
+
 }
 
 float addSynth::getSample(){
 	float sampleVal = 0;
 
+	for (int i = 0; i < 2; i++){
+		for (int j = 0; j < oscAmount; j++){
+			sampleVal += oscBank[i][j]->getSample();
+			oscBank[i][j]->tick();
+		}
+	}
+
+
+	/*
 	for (int i = 0; i < oscAmount; i++){
 		sampleVal+= oscBank[i]->getSample();
 		oscBank[i]->tick();
-	}
+	} */
 
 	return sampleVal;
 }
