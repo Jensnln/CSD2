@@ -3,7 +3,8 @@
 
 void CustomCallback::prepare(int rate) {
     samplerate = (float) rate;
-	addSynth1.init();
+//	addSynth1.init();
+	mySynth.init();
 
     std::cout << "\nsamplerate: " << samplerate << "\n";
 }
@@ -27,9 +28,10 @@ void CustomCallback::process(AudioBuffer buffer) {
 
 float CustomCallback::summedGetSample() {
 	float value =
+			mySynth.getSample();
+	mySynth.tick();
 //	square.getSample();
 //	sine.getSample();
-	addSynth1.getSample();
 
 	return value;
 }
