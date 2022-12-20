@@ -12,6 +12,7 @@ public:
   ~Sine();
 
   void print(int instance);
+//  float getSample();
 
 protected:
   void calculate();

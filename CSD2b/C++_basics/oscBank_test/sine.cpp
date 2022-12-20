@@ -17,6 +17,11 @@ void Sine::calculate() {
   sample = sin(M_PI * 2 * phase) * amplitude;
 }
 
+//float Sine::getSample() {
+////	float sampleVal = sample;
+//	return sample;
+//}
+
 void Sine::print(int instance){
 	std::cout << "Sine[" << instance << "]" << std::endl;
 }

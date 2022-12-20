@@ -15,6 +15,7 @@ public:
 
 	void init();
 	float getSample();
+	void tick();
 
 	int amt[3];
 
@@ -23,6 +24,7 @@ public:
 	int sawAmt;
 	int oscAmt;
 	int fundamental;
+	float sampleVal;
 
 	Oscillator** oscBank[3];
 

@@ -5,7 +5,7 @@
 #include "saw.h"
 
 Saw::Saw(){
-
+	std::cout << "Saw::Saw constructor\n";
 }
 
 Saw::~Saw() {
@@ -16,6 +16,13 @@ void Saw::calculate() {
 
 	sample = (phase * 2 -1) * amplitude;
 }
+
+/*
+float Saw::getSample() {
+//	float sampleVal = sample;
+	return sample;
+}
+ */
 
 void Saw::print(int instance) {
 	std::cout << "Saw[" << instance << "]" << std::endl;

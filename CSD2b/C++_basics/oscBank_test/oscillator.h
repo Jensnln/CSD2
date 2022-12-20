@@ -10,10 +10,12 @@ public:
 
 
 
-  float getSample();
+//  float getSample();
   void tick();
 
   virtual void print(int instance) = 0;
+
+  float getSample();
 
   //getters and setters
   void setFrequency(float frequency);
@@ -21,6 +23,7 @@ public:
 
 	// allow to set samplerate after initialization
 	void setSamplerate(float samplerate);
+	float sample = 0.1;
 
 protected:
   // abstract method calculate - needs to be overriden by subclasses
@@ -29,7 +32,6 @@ protected:
   float amplitude = 0.2;
   float phase = 0;
   // sample contains the current sample
-  float sample = 0;
   float samplerate = 44100;
 };
 

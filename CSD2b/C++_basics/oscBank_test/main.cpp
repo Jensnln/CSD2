@@ -8,6 +8,7 @@
 #include "math.h"
 //#include "square.h"
 #include "melody.h"
+#include "synth.h"
 
 /*
  * NOTE: the development library with headers for jack2 needs to be installed to build this program.
@@ -51,6 +52,12 @@ public:
 
     void prepare (double sampleRate) override {
       this->sampleRate=sampleRate;
+	  mySynth.init();
+	  std::cout << mySynth.getSample();
+//		for (int i = 0; i < 20; i++){
+//			std::cout << "sample[" << i << "]" << mySynth.getSample();
+//			mySynth.tick();
+//		}
 //      updatePitch(melody,square);
     } // prepare()
 
@@ -70,14 +77,18 @@ public:
 			  = buffer;
 
 
+
+
 	for (int sample = 0; sample < numFrames; sample++){
 		outputChannels[0][sample] =
 //				getSample() +
+//				mySynth.getSample() +
 				0;
 		outputChannels[1][sample] =
+//				mySynth.getSample() +
 //				getSample() +
 				0;
-//		tick();
+//		mySynth.tick();
 
 		frameIndex ++;
 		if(frameIndex >= noteDelayFactor * sampleRate) {
@@ -91,9 +102,10 @@ public:
     } // process()
 
 protected:
-	double sampleRate = 44100;
-  	float amplitude = 0.025;
-  	Melody melody;
+	double sampleRate;
+	float amplitude = 0.025;
+	Melody melody;
+	Synth mySynth;
   	int frameIndex = 0;
 
   /* instead of using bpm and specifying note lenghts we'll make every note

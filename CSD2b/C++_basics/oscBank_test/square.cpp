@@ -21,6 +21,11 @@ void Square::calculate() {
   }
 }
 
+//float Square::getSample() {
+////	float sampleVal = sample;
+//	return sample;
+//}
+
 void Square::print(int instance){
 	std::cout << "Square[" << instance << "]" << std::endl;
 }

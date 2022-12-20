@@ -16,7 +16,9 @@ void Oscillator::setSamplerate(float samplerate) {
 }
 
 float Oscillator::getSample() {
-  return sample;
+//	float sampleVal = 0.5;
+	sample = 0.1;
+  	return sample;
 }
 
 
