@@ -1,5 +1,6 @@
 //
 // Created by Jens on 20/12/2022.
+// Filename: synth.h
 //
 
 #ifndef CSD_SYNTH_H
@@ -16,6 +17,7 @@ public:
 	void init();
 	float getSample();
 	void tick();
+	void setFreq();
 
 	int amt[3];
 

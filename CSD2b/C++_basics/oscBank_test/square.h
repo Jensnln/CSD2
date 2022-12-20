@@ -12,7 +12,7 @@ public:
   Square();
   ~Square();
   void print(int instance);
-//	float getSample();
+  float getSample();
 
 protected:
   void calculate();
