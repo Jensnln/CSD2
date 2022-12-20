@@ -7,12 +7,13 @@
 #include <iostream>
 #include "synth.h"
 #include "sine.h"
+//#include "sine.h"
 #include "square.h"
 
 
 class addSynth : public Synth{
 public:
-	addSynth(float fundamental);
+	addSynth(float fundamental, int sineAmount, int squareAmount);
 	~addSynth();
 
 	void init();

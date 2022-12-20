@@ -10,27 +10,24 @@
 
 class Synth{
 public:
-	Synth(float fundamental);
+	Synth(float fundamental, int sineAmount, int squareAmount);
 	~Synth();
+
 	void init();
-//	float getSample();
-
-//	Declare what how many oscillators of what type you want.
-	int sineAmount = 0;
-	int squareAmount = 0;
-
-//	Calculate the total amount of oscillators.
-	int oscAmount = sineAmount + squareAmount;
-
 	float getSample();
+	void question();
 //	Make a pointer that points to an oscillator pointer.
 //	Name that pointer oscBank
 //	Let it oscBank point to an array of oscillator pointers with the size of oscAmount.
 	Oscillator** oscBank;
 
 
+
 protected:
 	float fundamental;
+	int sineAmount;
+	int squareAmount;
+	int oscAmount;
 };
 
 #endif //CSD_SYNTH_H

@@ -9,6 +9,7 @@
 class Sine : public Oscillator{
 public:
   Sine();
+  ~Sine();
 
 protected:
   void calculate();

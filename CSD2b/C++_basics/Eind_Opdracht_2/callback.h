@@ -4,7 +4,7 @@
 #include "jack_module.h"
 #include "sine.h"
 #include "square.h"
-#include "synth.h"
+#include "addSynth.h"
 //#include "addSynth.h"
 
 class CustomCallback : public AudioCallback {
@@ -20,7 +20,7 @@ private:
 //  Square square = Square(440, samplerate);
 //  Sine sine = Sine();
 //  Synth synth1 = Synth(65);
-  Synth addSynth1 = Synth(220);
+  addSynth addSynth1 = addSynth(220, 10, 0);
 };
 
 #endif //CALLBACK_H

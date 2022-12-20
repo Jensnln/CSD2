@@ -4,7 +4,7 @@
 
 #include "addSynth.h"
 
-addSynth::addSynth(float fundamental) : Synth(fundamental) {
+addSynth::addSynth(float fundamental, int sineAmount, int squareAmount) : Synth(fundamental, sineAmount, squareAmount) {
 	std::cout << "Inside addSynth()\n";
 }
 
@@ -13,6 +13,20 @@ addSynth::~addSynth() {
 }
 
 void addSynth::init(){
+
+	oscAmount = sineAmount + squareAmount;
+
+	oscBank = new Oscillator* [oscAmount];
+
+
+	std::cout
+			<< "sAmount: " << sineAmount << std::endl
+			<< "sAmount: " << squareAmount << std::endl
+			<< "oAmount: " <<  oscAmount << std::endl;
+
+	for (int i = 0; i < oscAmount; i ++){
+		std::cout << oscBank[i] << std::endl;
+	}
 
 //	Fill the oscBank with Sine objects.
 	for (int i = 0; i < sineAmount; i++){
@@ -34,7 +48,7 @@ void addSynth::init(){
 	}
 }
 
-float Synth::getSample(){
+float addSynth::getSample(){
 	float sampleVal = 0;
 
 	for (int i = 0; i < oscAmount; i++){

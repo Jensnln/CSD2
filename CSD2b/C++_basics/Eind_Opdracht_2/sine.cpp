@@ -5,9 +5,12 @@
 #include "sine.h"
 #include "math.h"
 
-Sine::Sine()
-{
+Sine::Sine()  {
   std::cout << "Sine::Sine constructor\n";
+}
+
+Sine::~Sine() {
+
 }
 
 void Sine::calculate() {

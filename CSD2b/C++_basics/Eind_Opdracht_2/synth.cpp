@@ -4,9 +4,12 @@
 
 #include "synth.h"
 
-Synth::Synth(float fundamental){
-	this->fundamental = fundamental;
+Synth::Synth(float fundamental, int sineAmount, int squareAmount){
 	std::cout << "Inside Synth()\n";
+//	Initialize all values.
+	this->fundamental = fundamental;
+	this->sineAmount = sineAmount;
+	this->squareAmount = squareAmount;
 }
 
 Synth::~Synth(){
@@ -15,18 +18,8 @@ Synth::~Synth(){
 
 //	Initialize the Synth.
 void Synth::init() {
-	std::cout << "amount of sines ";
-	std::cin >> sineAmount;
 
-	std::cout << "amount of squares ";
-	std::cin >> squareAmount;
-
-	std::cout << "fundamental ";
-	std::cin >> fundamental;
-
-
-
-
+//	question(); // Function to ask how many what of what.
 
 	oscAmount = sineAmount + squareAmount;
 
@@ -43,16 +36,21 @@ void Synth::init() {
 		oscBank[i] = new Square;
 	}
 
+	float fundamentalScale = 2;
+
+
+
 //	Set the frequency for all Sine objects.
 	for (int i = 0; i < sineAmount; i++){
-		oscBank[i]->setFrequency(fundamental + (fundamental * i));
+		oscBank[i]->setFrequency(fundamental + (fundamental * i * fundamentalScale));
 	}
 //	Set the frequency for all the Square objects.
 	for (int i = sineAmount; i < oscAmount; i++){
-		oscBank[i]->setFrequency(fundamental + (fundamental * (i - sineAmount)));
+		oscBank[i]->setFrequency(fundamental + (fundamental * (i - sineAmount) * fundamentalScale));
 	}
 }
 
+/*
 float Synth::getSample(){
 	float sampleVal = 0;
 
@@ -62,4 +60,17 @@ float Synth::getSample(){
 	}
 
 	return sampleVal;
+}
+ */
+
+void Synth::question(){
+	std::cout << "amount of sines ";
+	std::cin >> sineAmount;
+
+	std::cout << "amount of squares ";
+	std::cin >> squareAmount;
+
+	std::cout << "fundamental ";
+	std::cin >> fundamental;
+
 }
