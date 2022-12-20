@@ -14,6 +14,8 @@ addSynth::~addSynth() {
 
 void addSynth::init(){
 
+	question();
+
 	oscAmount = sineAmount + squareAmount;
 
 	oscBank = new Oscillator* [oscAmount];

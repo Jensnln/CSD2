@@ -19,7 +19,7 @@ Synth::~Synth(){
 //	Initialize the Synth.
 void Synth::init() {
 
-//	question(); // Function to ask how many what of what.
+	question(); // Function to ask how many what of what.
 
 	oscAmount = sineAmount + squareAmount;
 
