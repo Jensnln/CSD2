@@ -14,19 +14,19 @@ public:
 	Synth();
 	~Synth();
 
-	void init();
+	virtual void init();
 	float getSample();
 	void tick();
-	void setFreq();
+
+//	void setFreq();
+	void setFreq(float frequency);
+	void setSampleRate();
 
 	int amt[3];
-
-	int sineAmt;
-	int squareAmt;
-	int sawAmt;
-	int oscAmt;
 	int fundamental;
 	float sampleVal;
+	float sampleRate = 44100;
+	float amplitude = 0.25;
 
 	Oscillator** oscBank[3];
 

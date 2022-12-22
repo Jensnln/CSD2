@@ -12,7 +12,7 @@ public:
 	addSynth();
 	~addSynth();
 
-	void loadFreq(float frequency);
+	void setFreq(float frequency);
 
 	void init();
 };

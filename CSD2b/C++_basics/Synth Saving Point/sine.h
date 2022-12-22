@@ -9,9 +9,11 @@
 class Sine : public Oscillator{
 public:
   Sine();
+  Sine(float frequency);
   ~Sine();
 
   void print(int instance);
+  float getSample();
 
 protected:
   void calculate();

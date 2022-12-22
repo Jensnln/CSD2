@@ -13,6 +13,7 @@ public:
 	~Saw();
 
 	void calculate();
+	float getSample();
 
 	void print(int instance);
 };

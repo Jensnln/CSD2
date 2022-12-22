@@ -1,27 +1,27 @@
-#include <iostream>
+//
+// Created by Jens on 20/12/2022.
+//
+
 #include "saw.h"
-#include "math.h"
 
-//Sine::Sine(){
-//    std::cout << "Inside Sine()\n";
-//}
-
-Saw::Saw()
-{
-    std::cout << "Saw - Constructor \n";
+Saw::Saw(){
+	std::cout << "Saw::Saw constructor\n";
 }
 
-Saw::Saw(float frequency){
-    Oscillator::frequency = frequency;
+Saw::~Saw() {
+
 }
 
-Saw::~Saw()
-{
-    std::cout << "~Saw - Destructor \n";
+void Saw::calculate() {
+	sample = (phase * 2 -1) * amplitude;
 }
 
 
-void Saw::calculate()
-{
-    sample = phase * 2 -1;
+float Saw::getSample() {
+	return sample;
+}
+
+
+void Saw::print(int instance) {
+	std::cout << "Saw[" << instance << "]" << std::endl;
 }

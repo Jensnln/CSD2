@@ -1,7 +1,7 @@
 CXX= g++
-CXXFLAGS = -I/usr/local/include -Wall -std=c++1z
+CXXFLAGS = -I/usr/local/include -Wall -std=c++1z -g
 LDFLAGS= -ljack
-SOURCE=callback.o audioToFile.o oscillator.o sine.o saw.o square.o synth.o addSynth.o superSaw.o PWMSynth.o main.o
+SOURCE=main.o sine.o square.o saw.o oscillator.o synth.o melody.o addSynth.o sawSynth.o pwmSynth.o
 TARGET=example
 
 $(TARGET) : $(SOURCE)

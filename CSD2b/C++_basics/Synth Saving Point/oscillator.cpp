@@ -1,3 +1,4 @@
+// Filename: Oscillator.cpp
 #include "oscillator.h"
 #include "math.h"
 
@@ -11,12 +12,12 @@ Oscillator::~Oscillator() {
   std::cout << "Oscillator - destructor\n";
 }
 
-void Oscillator::setSamplerate(float samplerate) {
-  this->samplerate = samplerate;
+void Oscillator::setSampleRate(float sampleRate) {
+  this->sampleRate = sampleRate;
 }
 
 float Oscillator::getSample() {
-  return sample;
+  	return sample;
 }
 
 
@@ -28,6 +29,8 @@ void Oscillator::setFrequency(float frequency)
   this->frequency = frequency;
 }
 
+void Oscillator::setPwm(float frequency, float amount) {}
+
 float Oscillator::getFrequency()
 {
   return frequency;
@@ -36,13 +39,9 @@ float Oscillator::getFrequency()
 void Oscillator::tick()
 {
   // increment the phase to allow calculation of next sample
-  phase += frequency / samplerate;
+  phase += frequency / sampleRate;
   // wrap the phase to interval [0, 1]
   if(phase > 1) phase -= 1.0;
   // calculate sample for the incremented phase
   calculate();
 }
-
-//void Oscillator::print(int instance){
-//	std::cout << "New instance ["<< instance << "]";
-//}

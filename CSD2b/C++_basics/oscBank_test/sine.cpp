@@ -10,6 +10,10 @@ Sine::Sine()  {
   std::cout << "Sine::Sine constructor\n";
 }
 
+Sine::Sine(float frequency) {
+	setFrequency(frequency);
+}
+
 Sine::~Sine() {
 
 }
@@ -19,6 +23,7 @@ void Sine::calculate() {
 }
 
 float Sine::getSample() {
+//	sample = 0.01;
 	return sample;
 }
 

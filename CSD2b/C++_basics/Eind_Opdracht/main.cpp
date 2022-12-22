@@ -1,41 +1,165 @@
+// File name: main.ccp
+// Making the synth playing it in the callback class.
+
 #include <iostream>
 #include <thread>
 #include "jack_module.h"
 #include "math.h"
-#include "audioToFile.h"
-#include "oscillator.h"
+//#include "square.h"
+#include "melody.h"
+#include "synth.h"
+#include "addSynth.h"
+#include "sawSynth.h"
+#include "pwmSynth.h"
+#define NROFSYNTHS 2
+
+//Synth mySynth;
+Synth * synthBank[1];
 
 /*
- * NOTE: jack2 needs to be installed
- * jackd invokes the JACK audio server daemon
+ * NOTE: the development library with headers for jack2 needs to be installed to build this program.
+ *
+ * When built, before running the program start jackd, the JACK audio server daemon.
+ *
  * https://github.com/jackaudio/jackaudio.github.com/wiki/jackd(1)
- * on mac, you can start the jack audio server daemon in the terminal:
- * jackd -d coreaudio
+ *
+ * start jackd : jackd -d <backend>
+ * where backend is e.g. coreaudio (MacOS) or alsa (Linux)
+ *
+ * Alternatively there are graphical clients that start jackd.
  */
 
-#define WRITE_TO_FILE 0
 
 
-int main(int argc, char **argv) {
-  auto callback = CustomCallback{};
-  auto jackModule = JackModule{callback};
+class Callback : public AudioCallback
+{
 
-#if WRITE_TO_FILE
-  AudioToFile audioToFile;
-  audioToFile.write(callback);
-#else
+public:
 
-  jackModule.init(0, 2);
+// 	Function to calculate midi to frequency.
+    double mtof(float mPitch)
+    {
+      // source of the mtof calculation:
+      // https://www.musicdsp.org/en/latest/Other/125-midi-note-frequency-conversion.html
+	  double freqVal = 440.0 * pow(2.0, (mPitch - 57.0f)/12.0f);
 
+      return freqVal /4;
+    } // mtof()
+
+
+
+//	Function to update the pitch.
+    void updatePitch(Melody& melody, Synth& synth) {
+      float pitch = melody.getPitch();
+      double freq = mtof(pitch);
+//      std::cout << "next pitch: " << pitch << ", freq is: " << freq << std::endl;
+      synth.setFreq(freq);
+
+    } // updatePitch()
+
+
+	float getAllSample(){
+		float sampleVal = 0;
+
+		sampleVal +=
+				synthBank[0] -> getSample()+
+				0;
+
+		return sampleVal;
+	}
+
+
+    void prepare (double sampleRate) override {
+      this->sampleRate=sampleRate;
+      updatePitch(melody,*synthBank[0]);
+    } // prepare()
+
+
+    /*
+     * process() gets called by the JACK engine.
+     *
+     * If you are interested in incoming audio, use inputChannels[channel][sample]
+     * For sending audio to the output(s), use outputChannels[channel][sample]
+     */
+    void process (AudioBuffer buffer) override {
+        auto [inputChannels,
+			  outputChannels,
+			  numInputChannels,
+			  numOutputChannels,
+			  numFrames]
+			  = buffer;
+
+
+	for (int sample = 0; sample < numFrames; sample++){
+		outputChannels[0][sample] = getAllSample();
+		outputChannels[1][sample] = getAllSample();
+		synthBank[0]->tick();
+		frameIndex ++;
+		if(frameIndex >= noteDelayFactor * sampleRate) {
+			// reset frameIndex
+			frameIndex = 0;
+			std::cout << frameIndex;
+
+//			Function for updating pitch.
+			updatePitch(melody,*synthBank[0]);
+		}
+	  } // for sample
+    } // process()
+
+protected:
+	double sampleRate;
+	float amplitude = 0.025;
+	Melody melody;
+  	int frameIndex = 0;
+
+  /* instead of using bpm and specifying note lenghts we'll make every note
+   * equal length and specify the delay between notes in term of the
+   * samplerate
+   *
+   * A note of say 500 msec or 0.5 sec, takes 0.5*samplerate samples to be
+   * played
+   */
+  double noteDelayFactor=0.1;
+}; // Callback{}
+
+
+
+int main(int argc,char **argv)
+{
+	std::string choice;
+	std::cout << "What type of synth do you want? [add, pwm, saw]: "; std::cin >> choice; std::cout <<"\n";
+
+	if (choice == "add"){
+		synthBank[0] = new addSynth();
+	} else if (choice == "pwm"){
+		synthBank[0] = new pwmSynth();
+	} else if (choice == "saw"){
+		synthBank[0] = new sawSynth();
+	}
+
+
+	synthBank[0]->init();
+
+
+  auto callback = Callback {};
+  auto jack_module = JackModule(callback);
+
+  jack_module.init(1,2);
+
+  std::cout << "\n\nType 'quit' to exit\n";
   bool running = true;
   while (running) {
-    switch (std::cin.get()) {
+    switch (std::cin.get())
+    {
       case 'q':
         running = false;
+        break;
+
     }
-  }
-#endif
-  //end the program
+  } // while
+
   return 0;
+
 } // main()
+
 

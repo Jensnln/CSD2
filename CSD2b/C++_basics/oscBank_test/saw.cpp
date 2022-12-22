@@ -13,7 +13,6 @@ Saw::~Saw() {
 }
 
 void Saw::calculate() {
-
 	sample = (phase * 2 -1) * amplitude;
 }
 

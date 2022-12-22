@@ -1,40 +1,41 @@
-#include <iostream>
+// Filename: square.cpp
+// Created by Ciska Vriezenga on 06/12/2022.
+//
+
 #include "square.h"
+#include "math.h"
 
 Square::Square()
 {
-    std::cout << "Square - Constructor \n";
+//  std::cout << "Square::Square constructor\n";
 }
 
-Square::Square(float frequency){
-    Oscillator::frequency = frequency;
+Square::~Square() {
+
 }
 
-Square::~Square()
-{
-    std::cout << "~Square - Destructor \n";
+void Square::setPwm(float frequency, float amount) {
+	pwmSine.setFrequency(frequency);
+	pwmAmt = amount;
+	std::cout << pwmAmt;
+	std::cout << frequency;
+}
+
+void Square::calculate() {
+  sample = amplitude;
+  float pwm = pwmSine.getSample() /2;
+  pwmSine.tick();
+
+  if(phase > 0.5 + (pwm * pwmAmt)) {
+    sample *=-1.0f;
+  }
+}
+
+// Return the sample value, overrides the method from the base class.
+float Square::getSample() {
+	return sample;
 }
 
 
-void Square::setPwm(float pwmFrequency, float pwmAmp){
-    pwmSine.setFrequency(pwmFrequency);
-    this->pwmAmp = pwmAmp;
-}
 
-void Square::calculate()
-{
-//    Make a variable to store the current phase from the pwmSine.
-    float pwmSample = pwmSine.getSample();
-//    Make a variable to calculate the pwm. You want the pwm to oscillate between -0.5 and +0.5, so you subtract 0.5.
-    float pwm = (pwmSample - 0.5) * pwmAmp;
 
-//    Set the sample value as amplitude;
-    sample = amplitude;
-//    A normal square has the sample value flipped at 0.5, now you are going to modulate the that value.
-//        ->  if (phase > 0.5) sample *=-1.0f;
-//    Now you want the value to be shifting between 0 and 1, so -0.5 and +0.5 as pwm.
-    if(phase > (pwm + 0.5)) sample *=-1.0f;
-
-//    Tick the pwmSine to get generate the new sample value.
-    pwmSine.tick();
-}

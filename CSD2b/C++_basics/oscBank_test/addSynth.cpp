@@ -44,7 +44,6 @@ void addSynth::init(){
 }
 
 void addSynth::loadFreq(float frequency) {
-	std::cout << "loadFreq() \n";
 	fundamental = frequency;
 	for (int i = 0; i < 3; i++){
 		for (int j = 0; j < amt[i]; j++){

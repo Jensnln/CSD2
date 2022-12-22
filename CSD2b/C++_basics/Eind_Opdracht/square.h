@@ -1,22 +1,26 @@
-#pragma once
-#include <iostream>
+// Filename: square.h
+// Created by Ciska Vriezenga on 06/12/2022.
+//
+
+
+#ifndef BLOK2B_SQUARE_H
+#define BLOK2B_SQUARE_H
+
 #include "oscillator.h"
 #include "sine.h"
 
-class Square : public Oscillator
-{
+class Square : public Oscillator{
 public:
-    Square();
-    Square(float frequency);
-    ~Square();
-
-    void calculate();
-
-//    Set and Get
-    void setPwm(float pwmFrequency, float pwmAmp);
+	Square();
+	~Square();
+  	float getSample();
+	  Sine pwmSine = Sine(2);
+	  void setPwm(float frequency, float amount);
 
 
 protected:
-    Sine pwmSine = Sine(1);
-    float pwmAmp = 0.3;
+	void calculate();
+	float pwmAmt;
 };
+
+#endif //BLOK2B_SQUARE_H

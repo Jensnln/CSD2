@@ -43,8 +43,7 @@ void addSynth::init(){
 	setSampleRate();
 }
 
-void addSynth::loadFreq(float frequency) {
-	std::cout << "loadFreq() \n";
+void addSynth::setFreq(float frequency) {
 	fundamental = frequency;
 	for (int i = 0; i < 3; i++){
 		for (int j = 0; j < amt[i]; j++){

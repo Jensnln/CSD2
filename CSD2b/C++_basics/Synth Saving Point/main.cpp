@@ -1,6 +1,5 @@
-/*
-  Example program that plays a simple hard coded melody using a square wave oscillator
-*/
+// File name: main.ccp
+// Making the synth playing it in the callback class.
 
 #include <iostream>
 #include <thread>
@@ -8,10 +7,20 @@
 #include "math.h"
 //#include "square.h"
 #include "melody.h"
+#include "synth.h"
+#include "addSynth.h"
+#include "sawSynth.h"
+#include "pwmSynth.h"
+#define NROFSYNTHS 2
+
+//Synth mySynth;
+addSynth myAddSynth;
+sawSynth mySawSynth;
+pwmSynth myPwmSynth;
 
 /*
  * NOTE: the development library with headers for jack2 needs to be installed to build this program.
- * 
+ *
  * When built, before running the program start jackd, the JACK audio server daemon.
  *
  * https://github.com/jackaudio/jackaudio.github.com/wiki/jackd(1)
@@ -29,29 +38,46 @@ class Callback : public AudioCallback
 
 public:
 
-/* 	Function to calculate midi to frequency.
+// 	Function to calculate midi to frequency.
     double mtof(float mPitch)
     {
       // source of the mtof calculation:
       // https://www.musicdsp.org/en/latest/Other/125-midi-note-frequency-conversion.html
-      return 440.0 * pow(2.0, (mPitch - 57.0f)/12.0f);
+	  double freqVal = 440.0 * pow(2.0, (mPitch - 57.0f)/12.0f);
+
+      return freqVal /4;
     } // mtof()
-*/
 
 
-/*	Function to update the pitch.
-    void updatePitch(Melody& melody, Square& square) {
+
+//	Function to update the pitch.
+    void updatePitch(Melody& melody, Synth& synth) {
       float pitch = melody.getPitch();
       double freq = mtof(pitch);
       std::cout << "next pitch: " << pitch << ", freq is: " << freq << std::endl;
-//      square.setFrequency(freq);
+	  synth.setFreq(freq);
+//      myPwmSynth.setFreq(freq);
+
     } // updatePitch()
-*/
+
+
+	float getAllSample(){
+		float sampleVal = 0;
+
+		sampleVal +=
+//				myAddSynth.getSample() +
+//				mySawSynth.getSample() +
+				myPwmSynth.getSample() +
+				//	mySynth.getSample() +
+				0;
+
+		return sampleVal;
+	}
 
 
     void prepare (double sampleRate) override {
       this->sampleRate=sampleRate;
-//      updatePitch(melody,square);
+      updatePitch(melody,myPwmSynth);
     } // prepare()
 
 
@@ -72,28 +98,38 @@ public:
 
 	for (int sample = 0; sample < numFrames; sample++){
 		outputChannels[0][sample] =
+				getAllSample() +
+//				myAddSynth.getSample() +
+//				mySawSynth.getSample() +
+//				myPwmSynth.getSample() +
 //				getSample() +
 				0;
 		outputChannels[1][sample] =
+				getAllSample() +
+//				myAddSynth.getSample() +
+//				mySawSynth.getSample() +
+//				myPwmSynth.getSample() +
 //				getSample() +
 				0;
-//		tick();
-
+//		myAddSynth.tick();
+//		mySawSynth.tick();
+		myPwmSynth.tick();
 		frameIndex ++;
 		if(frameIndex >= noteDelayFactor * sampleRate) {
 			// reset frameIndex
 			frameIndex = 0;
+			std::cout << frameIndex;
 
 //			Function for updating pitch.
-//			updatePitch(melody,square);
+			updatePitch(melody,myPwmSynth);
 		}
 	  } // for sample
     } // process()
 
 protected:
-	double sampleRate = 44100;
-  	float amplitude = 0.025;
-  	Melody melody;
+	double sampleRate;
+	float amplitude = 0.025;
+	Melody melody;
   	int frameIndex = 0;
 
   /* instead of using bpm and specifying note lenghts we'll make every note
@@ -103,13 +139,18 @@ protected:
    * A note of say 500 msec or 0.5 sec, takes 0.5*samplerate samples to be
    * played
    */
-  double noteDelayFactor=0.005;
+  double noteDelayFactor=0.1;
 }; // Callback{}
 
 
 
 int main(int argc,char **argv)
 {
+//	Synth mySynth;
+//	myAddSynth.init();
+//	mySawSynth.init();
+	myPwmSynth.init();
+//	synthBank[0]->init();
   auto callback = Callback {};
   auto jack_module = JackModule(callback);
 
@@ -129,4 +170,7 @@ int main(int argc,char **argv)
   return 0;
 
 } // main()
+
+
+
 

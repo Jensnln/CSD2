@@ -1,6 +1,6 @@
 /**********************************************************************
 *          Copyright (c) 2022, Hogeschool voor de Kunsten Utrecht
-*                      Hilversum, the Netherlands
+*                      Utrecht, the Netherlands
 *                          All rights reserved
 ***********************************************************************
 *  This program is free software: you can redistribute it and/or modify
@@ -50,21 +50,25 @@
 struct AudioBuffer {
     const float** inputChannels;
     float** outputChannels;
-    const int numInputChannels;
-    const int numOutputChannels;
-    const int numFrames;
+    int numInputChannels;
+    int numOutputChannels;
+    int numFrames;
 };
+
+
 
 /// Base class for your own audio callback. Make a subclass of this and register it with a `JackModule` instance.
 class AudioCallback {
 public:
     /// This function is called before process, so you can prepare any of your effects.
-    virtual void prepare (int samplerate) {}
+    virtual void prepare (double sampleRate) {}
 
     /// This function is called when Jack requests new audio data. An instance of `AudioBuffer` is passed as an argument, which
     /// can be used to collect incoming audio and send outgoing sample data.
     virtual void process (AudioBuffer buffer) {}
 };
+
+
 
 /// Jack Client. Make an instance of this (only one per program) and provide it with a reference to your
 /// `AudioCallback` subclass via its constructor. After that call `init()` to start the Jack session.
@@ -104,8 +108,8 @@ public:
     }
 
     /// Returns the sampling rate at which Jack is running. Only call this after `init()` has been called
-    int getSampleRate() const {
-        return static_cast<int> (jack_get_sample_rate (client));
+    double getSampleRate() const {
+        return static_cast<double> (jack_get_sample_rate (client));
     }
 
 private:

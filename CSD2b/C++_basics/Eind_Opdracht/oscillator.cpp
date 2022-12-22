@@ -1,46 +1,47 @@
+// Filename: Oscillator.cpp
 #include "oscillator.h"
-
+#include "math.h"
 
 Oscillator::Oscillator()
 {
-    std::cout << "Oscillator - Constructor \n";
+  std::cout << "Oscillator - constructor\n";
 }
 
-Oscillator::Oscillator(float frequency) {
-    this->frequency = frequency;
 
+Oscillator::~Oscillator() {
+  std::cout << "Oscillator - destructor\n";
 }
 
-Oscillator::~Oscillator()
+void Oscillator::setSampleRate(float sampleRate) {
+  this->sampleRate = sampleRate;
+}
+
+float Oscillator::getSample() {
+  	return sample;
+}
+
+
+//getters and setters
+void Oscillator::setFrequency(float frequency)
 {
-    std::cout << "Oscillator - Destructor \n";
+  // TODO
+  // add check to see if parameter is valid
+  this->frequency = frequency;
+}
+
+void Oscillator::setPwm(float frequency, float amount) {}
+
+float Oscillator::getFrequency()
+{
+  return frequency;
 }
 
 void Oscillator::tick()
 {
-    phase += frequency / sampleRate;
-
-    // Wrap phase
-    if (phase > 1.0f) phase -= 1.0f;
-    calculate();
-
+  // increment the phase to allow calculation of next sample
+  phase += frequency / sampleRate;
+  // wrap the phase to interval [0, 1]
+  if(phase > 1) phase -= 1.0;
+  // calculate sample for the incremented phase
+  calculate();
 }
-
-float Oscillator::getSample()
-{
-    return sample;
-}
-
-void Oscillator::setSampleRate(float sampleRate)
-{
-    std::cout << "Inside setSampleRate()\n";
-    std::cout << "New sampleRate:" << sampleRate << "\n";
-    this-> sampleRate = sampleRate;
-}
-
-void Oscillator::setFrequency(float frequency) {
-    std::cout << "Inside setFrequency()\n";
-    this->frequency = frequency;
-    std::cout << "New frequency: " << frequency << std::endl;
-}
-
