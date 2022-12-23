@@ -7,7 +7,7 @@
 #include "math.h"
 
 Sine::Sine()  {
-  std::cout << "Sine::Sine constructor\n";
+	std::cout << "Sine::Sine constructor\n";
 }
 
 Sine::Sine(float frequency) {
@@ -19,7 +19,7 @@ Sine::~Sine() {
 }
 
 void Sine::calculate() {
-  sample = sin(M_PI * 2 * phase) * amplitude;
+	sample = sin(M_PI * 2 * phase) * amplitude;
 }
 
 float Sine::getSample() {

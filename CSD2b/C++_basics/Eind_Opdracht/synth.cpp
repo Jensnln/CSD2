@@ -51,16 +51,6 @@ void Synth::tick(){
 	}
 }
 
-/*
-void Synth::setFreq(){
-	for (int i = 0; i < 3; i++){
-		for (int j = 0; j < amt[i]; j++){
-			oscBank[i][j]->setFrequency(fundamental + (j * fundamental));
-		}
-	}
-}
- */
-
 void Synth::setFreq(float frequency) {
 //	Function that is virtal to implement the frequency in a different way.
 	loadFreq(frequency);

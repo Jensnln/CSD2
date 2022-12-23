@@ -12,6 +12,7 @@ public:
 	pwmSynth();
 	~pwmSynth();
 
+protected:
 	void init();
 	void loadFreq(float frequency);
 	void setPwm();

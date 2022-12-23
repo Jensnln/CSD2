@@ -8,12 +8,12 @@
 #include "sine.h"
 #include "square.h"
 #include "saw.h"
+#include "UI.h"
 
 class Synth{
 public:
 	Synth();
-	~Synth();
-
+	virtual ~Synth();
 
 //	Function to call form main.cpp to gather the samples for all synth types.
 	float getSample();
@@ -32,6 +32,7 @@ public:
 
 //	Array to hold the amount of oscillators from each type
 	int amt[3];
+
 	int fundamental;
 	float sampleVal;
 	float sampleRate = 44100;

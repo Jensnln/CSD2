@@ -22,13 +22,13 @@ void Square::setPwm(float frequency, float amount) {
 }
 
 void Square::calculate() {
-  sample = amplitude;
-  float pwm = pwmSine.getSample() /2;
-  pwmSine.tick();
+	sample = amplitude;
+	float pwm = pwmSine.getSample() /2;
+	pwmSine.tick();
 
-  if(phase > 0.5 + (pwm * pwmAmt)) {
-    sample *=-1.0f;
-  }
+	if(phase > 0.5 + (pwm * pwmAmt)) {
+		sample *=-1.0f;
+	}
 }
 
 // Return the sample value, overrides the method from the base class.

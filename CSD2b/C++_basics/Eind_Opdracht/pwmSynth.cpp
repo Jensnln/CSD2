@@ -22,17 +22,17 @@ void pwmSynth::init(){
 
 	//	Fill the array with sine object pointers.
 	for (int i = 0; i < amt[0];i++){
-	oscBank[0][i] = new Sine;
+		oscBank[0][i] = new Sine;
 	}
 
 	//	Fill the array with square object pointers.
 	for (int i = 0; i < amt[1];i++){
-	oscBank[1][i] = new Square;
+		oscBank[1][i] = new Square;
 	}
 
 	//	Fill the array with saw object pointers
 	for (int i = 0; i < amt[2]; i++){
-	oscBank[2][i] = new Saw;
+		oscBank[2][i] = new Saw;
 	}
 
 	setPwm();

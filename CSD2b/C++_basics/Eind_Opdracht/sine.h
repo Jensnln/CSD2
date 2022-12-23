@@ -8,15 +8,15 @@
 
 class Sine : public Oscillator{
 public:
-  Sine();
-  Sine(float frequency);
-  ~Sine();
+	Sine();
+	Sine(float frequency);
+	~Sine();
 
-  void print(int instance);
-  float getSample();
+	void print(int instance);
+	float getSample();
 
 protected:
-  void calculate();
+	void calculate();
 };
 
 

@@ -11,9 +11,10 @@ public:
 	sawSynth();
 	~sawSynth();
 
+
+protected:
 	void init();
 	void loadFreq(float frequency);
-
 	float detune = 0.0;
 };
 #endif //CSD_SAWSYNTH_H

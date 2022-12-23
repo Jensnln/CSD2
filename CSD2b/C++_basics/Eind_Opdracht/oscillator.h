@@ -8,20 +8,22 @@
 class Oscillator
 {
 public:
-  	Oscillator();
-  	~Oscillator();
+	Oscillator();
+	~Oscillator();
 
-  	void tick();
-  	virtual float getSample() = 0;
 
-  //getters and setters
-  	void setFrequency(float frequency);
-  	float getFrequency();
+	void tick();
+	//getters and setters
+	void setFrequency(float frequency);
+	float getFrequency();
 
+	virtual float getSample() = 0;
 	virtual void setPwm(float frequency, float amount);
-
 	// allow to set samplerate after initialization
 	void setSampleRate(float sampleRate);
+
+	void setAmp(float amplitude);
+
 protected:
 
 	// abstract method calculate - needs to be overriden by subclasses
@@ -32,7 +34,7 @@ protected:
 	float amplitude = 1;
 	float phase = 0;
 	// sample contains the current sample
-	 float sampleRate = 44100;
+	float sampleRate = 44100;
 
 
 };

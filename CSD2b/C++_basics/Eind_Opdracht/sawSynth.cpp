@@ -12,8 +12,10 @@ void sawSynth::init(){
 	std::cout << "sawSynth::init()\n";
 	amt[0] = 0;
 	amt[1] = 0;
-	std::cout << "How many saws? "; std::cin >> amt[2];
-	std::cout << "Much detune would you like to have? (in percentage)"; std::cin >> detune;
+	std::cout << "How many saws? ";
+	std::cin >> amt[2];
+	std::cout << "Much detune would you like to have? (in percentage)"; //std::cin >> detune;
+	detune = UI::retrieveValueInRange(0, 100);
 
 
 	//	Filling all the 2D arrays with Oscillator point.
@@ -36,6 +38,7 @@ void sawSynth::init(){
 		oscBank[2][i] = new Saw;
 	}
 
+	amplitude = amplitude / amt[2];
 }
 
 void sawSynth::loadFreq(float frequency) {

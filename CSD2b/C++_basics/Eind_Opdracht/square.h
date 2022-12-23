@@ -13,9 +13,9 @@ class Square : public Oscillator{
 public:
 	Square();
 	~Square();
-  	float getSample();
-	  Sine pwmSine = Sine(2);
-	  void setPwm(float frequency, float amount);
+	float getSample();
+	Sine pwmSine = Sine(2);
+	void setPwm(float frequency, float amount);
 
 
 protected:

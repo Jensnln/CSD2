@@ -12,8 +12,8 @@ public:
 	addSynth();
 	~addSynth();
 
+protected:
 	void loadFreq(float frequency);
-
 	void init();
 };
 
