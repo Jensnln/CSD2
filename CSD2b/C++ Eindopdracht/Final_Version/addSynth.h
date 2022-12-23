@@ -18,3 +18,4 @@ protected:
 };
 
 #endif //CSD_ADDSYNTH_H
+
