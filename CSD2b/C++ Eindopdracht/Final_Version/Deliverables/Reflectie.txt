@@ -1,0 +1,26 @@
+﻿Reflectie Jens Blok 2B:
+
+
+Onderwerpen
+Dit semester heb ik geleerd over arrays, wat data structures zijn die een sequentie van elementen van hetzelfde type opslaan. 
+Ook ben ik aan de slag gegaan met pointers, dat zijn variabelen  die het geheugenadres van een andere variabele opslaan. Om een pointer in C++ te declareren, heb ik de *-operator gebruikt. Ook kan ik nu een pointer dereferencen.
+Polymorphisme is ook aan bod gekomen, dat is een mechanisme waarbij een object meerdere vormen kan aannemen. In C++ kun je dit bereiken via inheritance en virtual functions.
+Het meest heb ik mijn tanden gezet in 2D arrays, dit zijn arrays et 2 dimensies. Ik heb dit gebruikt om dynamisch oscillatoren aan te kunnen maken en hier vervolgens methods van aan te roepen. 
+
+
+Workflow
+In dit blok heb ik ook veel gewerkt aan mijn workflow. In tegenstelling to python hadden kon ik nu alleen niet goed werken met directories in mijn project. Dit is wel iets wat ik graag nog wil leren in volgende blokken. Ik merkte wel dat ik eigenlijk elke keer dat ik aan het project ging werken met een schone lei ben begonnen en alles from scratch weer heb gecodeerd. Dit was uiteindelijk help vol omdat ik nu snel nieuwe classes op kan stellen en inheritance beter onder de knie heb. Wel merkte ik dat het werken met de Jack Module niet altijd even goed ging. Ik had graag een meest basic versie van jack gewild omdat ik nu vaak veel tijd kwijt was met het uitcommente van stukken code dit in de les waren geschreven.
+
+
+Git
+Aangezien ik ben overgestapt naar Clion moest ik git weer een beetje opnieuw uitvinden. Ik merk dat ik de volledige power van git nog niet onder de knie heb. Vaak sla ik dingen nog steeds in een mapje op ipv dat ik terug roll naar een commit. Dit is ook iets wat ik graag nog wil weten.
+
+
+Uren:
+Dit blok heb ik vooral met de andere jongens van CSD gecodeerd. Dit was vooral op de dinsdag en de vrijdag, Ook heb ben ik op donderdag student assistent, ondanks dat het JS is helpt dit toch heel erg met het inzicht en hoe ik bepaalde dingen kan structureren. Ook merk ik dat ik veel meer bezig ben met hoe memory werkt.
+
+
+
+
+Eindoplevering
+Over het algemeen ben ik redelijk tevreden met de eindoplevering, alleen tegen het einde aan kreeg ik een aantal slecht verklaarbare bugs die wel zorgde voor wat stress. Deze problemen verdwenen als sneeuw voor de zon (Daan noemde het een christmass miracle). Ik had graag nog wat meer met de melody generatie willen doen of midi functionaliteit. Misschien nog in de kerstvakantie.
