@@ -4,19 +4,16 @@
 
 #include "synth.h"
 
-Synth::Synth() {
-
-}
-
+Synth::Synth() {}
 Synth::~Synth() {
+
 }
 
-void Synth::init(){
-}
+// Function that gets overridden.
+void Synth::init(){}
 
 //	Function to sum all the sampleValues from all the oscillators.
 float Synth::getSample(){
-
 	float sampleVal = 0;
 
 //	Sum all the sine samples.
@@ -34,15 +31,15 @@ float Synth::getSample(){
 		sampleVal += oscBank[2][i]->getSample();
 	}
 
-//	std::cout << "SV: " << sampleVal << std::endl;
 	sampleVal *= amplitude;
+
+//	std::cout << "SV" << sampleVal << std::endl;
 
 	return sampleVal;
 }
 
 //	Function to tick all the oscs to the next phase step.
 void Synth::tick(){
-
 //	For loop for all the osc types, then another for loop with "i < amt[i]" to tick the oscs in specific array.
 	for(int i = 0; i < 3; i++){
 		for (int j = 0; j < amt[i]; j++){

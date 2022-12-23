@@ -5,14 +5,7 @@
 #include "pwmSynth.h"
 
 pwmSynth::pwmSynth() {}
-pwmSynth::~pwmSynth() {
-	for(int i = 0; i < 3; i++) {
-		for(int j = 0; j < amt[i]; j++) {
-			delete oscBank[i][j];
-		}
-		delete[] oscBank[i];
-	}
-}
+pwmSynth::~pwmSynth() {}
 
 void pwmSynth::init(){
 

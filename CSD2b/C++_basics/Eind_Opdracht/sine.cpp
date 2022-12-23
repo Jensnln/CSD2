@@ -7,7 +7,6 @@
 #include "math.h"
 
 Sine::Sine()  {
-	std::cout << "Sine::Sine constructor\n";
 }
 
 Sine::Sine(float frequency) {

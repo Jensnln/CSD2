@@ -2,15 +2,9 @@
 #include "oscillator.h"
 #include "math.h"
 
-Oscillator::Oscillator()
-{
-	std::cout << "Oscillator - constructor\n";
-}
+Oscillator::Oscillator() {}
 
-
-Oscillator::~Oscillator() {
-	std::cout << "Oscillator - destructor\n";
-}
+Oscillator::~Oscillator() {}
 
 void Oscillator::setSampleRate(float sampleRate) {
 	this->sampleRate = sampleRate;
@@ -18,34 +12,33 @@ void Oscillator::setSampleRate(float sampleRate) {
 
 float Oscillator::getSample() {
 	return sample;
+	std::cout << "getSample" << sample << std::endl;
 }
 
 
-//getters and setters
-void Oscillator::setFrequency(float frequency)
-{
-	// TODO
-	// add check to see if parameter is valid
+void Oscillator::setFrequency(float frequency) {
 	this->frequency = frequency;
 }
 
-float Oscillator::getFrequency()
-{
+float Oscillator::getFrequency() {
 	return frequency;
 }
 
-void Oscillator::tick()
-{
+void Oscillator::tick() {
 	// increment the phase to allow calculation of next sample
 	phase += frequency / sampleRate;
 	// wrap the phase to interval [0, 1]
-	if(phase > 1) phase -= 1.0;
+	if (phase > 1) phase -= 1.0;
 	// calculate sample for the incremented phase
 	calculate();
 }
 
 void Oscillator::setPwm(float frequency, float amount) {}
 
-void Oscillator::setAmp(float amplitude){
+void Oscillator::setAmp(float amplitude) {
 	this->amplitude = amplitude;
+}
+
+float Oscillator::getAmp() {
+	return amplitude;
 }

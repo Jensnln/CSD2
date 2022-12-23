@@ -13,8 +13,7 @@
 class Synth{
 public:
 	Synth();
-	virtual ~Synth();
-
+	~Synth();
 //	Function to call form main.cpp to gather the samples for all synth types.
 	float getSample();
 //	Function to change the frequency from main.cpp in the subclasses.
