@@ -15,8 +15,6 @@ Square::~Square() {
 void Square::setPwm(float frequency, float amount) {
 	pwmSine.setFrequency(frequency);
 	pwmAmt = amount;
-	std::cout << pwmAmt;
-	std::cout << frequency;
 }
 
 void Square::calculate() {

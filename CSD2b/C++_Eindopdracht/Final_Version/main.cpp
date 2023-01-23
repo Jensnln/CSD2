@@ -83,7 +83,6 @@ public:
 			if (frameIndex >= noteDelayFactor * sampleRate) {
 				// reset frameIndex
 				frameIndex = 0;
-				std::cout << frameIndex;
 				// Function for updating pitch.
 				updatePitch(melody, *synthBank[0]);
 			}
@@ -111,7 +110,7 @@ protected:
 int main(int argc, char** argv) {
 
 //	Ask what synth to load.
-	std::cout << "What type of synth do you want to load? [add, pwm, saw]\n";
+	std::cout << "What type of synth do you want to load? [add, pwm, saw]";
 //	Delcare the synth type.
 	std::string synths[3] = {"add", "pwm", "saw"};
 	std::string choice = UI::retrieveSelection(synths, 3);
@@ -132,7 +131,7 @@ int main(int argc, char** argv) {
 
 	jack_module.init(1, 2);
 
-	std::cout << "\nType 'quit' to exit, 's' to swap to new synth.\n";
+	std::cout << "Type 'quit' to exit, 's' to swap to new synth.\n";
 	bool running = true;
 	while (running) {
 		switch (std::cin.get()) {
@@ -144,7 +143,7 @@ int main(int argc, char** argv) {
 			case 's':
 //				Ask what synth to load.
 				std::cout
-						<< "\nWhat type of synth do you want? [add, pwm, saw]. \n";// std::cin >> choice; std::cout <<"\n";
+						<< "\nWhat type of synth do you want? [add, pwm, saw].";
 				std::string choice = UI::retrieveSelection(synths, 3);
 
 //				Make an empty Synth ptr.
@@ -163,12 +162,15 @@ int main(int argc, char** argv) {
 				Synth* oldSynth = synthBank[0];
 				synthBank[0] = newSynth;
 				delete oldSynth;
+				std::cout << "\nType 'quit' to exit, 's' to swap to new synth.\n";
 				break;
+
+
 
 		}
 	} // while
 
-	std::cout << "\n\nThank you for playing\n\n\n\n";
+	std::cout << "\n\nThank you for playing.\n\n\n\n";
 
 	return 0;
 

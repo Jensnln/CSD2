@@ -5,7 +5,7 @@
 #include "sawSynth.h"
 #include "math.h"
 
-sawSynth::sawSynth() {std::cout << "sawSynth()\n";}
+sawSynth::sawSynth() {}
 sawSynth::~sawSynth() {
 	for(int i = 0; i < 3; i++) {
 		for(int j = 0; j < amt[i]; j++) {
@@ -19,7 +19,7 @@ void sawSynth::init(){
 	amt[1] = 0;
 	std::cout << "How many saws? ";
 	std::cin >> amt[2];
-	std::cout << "Much detune would you like to have? (in percentage)";
+	std::cout << "Much detune would you like to have? (in percentage)\n";
 	detune = UI::retrieveValueInRange(0, 100);
 
 
