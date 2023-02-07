@@ -1,0 +1,11 @@
+Voor een delay:
+- Array
+- Write Head
+- Read Head
+
+Je schrijft in een array door:
+BufferArray[0] = A; // te doen.
+BufferArray = [A, B, C, D]; // Na vulling.
+
+Door de bufferindex te wrappen kan je dit krijgen:
+BufferArray = [F, G, C, D]; // Dit is met 2 samples delay.
