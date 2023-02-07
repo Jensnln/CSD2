@@ -9,7 +9,6 @@ Square::Square() {
 }
 
 Square::~Square() {
-
 }
 
 void Square::setPwm(float frequency, float amount) {
@@ -31,7 +30,3 @@ void Square::calculate() {
 float Square::getSample() {
 	return sample;
 }
-
-
-
-
