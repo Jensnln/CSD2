@@ -15,20 +15,27 @@
 #include <SD.h>
 #include <SerialFlash.h>
 
+
 // GUItool: begin automatically generated code
 AudioInputAnalog         adc1;           //xy=164,95
 AudioAnalyzePeak         peak1;          //xy=317,123
 AudioConnection          patchCord1(adc1, peak1);
+AudioSynthWaveformSine   sine1;          //xy=314,307
+AudioOutputAnalog        dac1;           //xy=510,307
+AudioConnection          patchCord2(sine1, dac1);
 // GUItool: end automatically generated code
 
-const int pin =  23;
+
+int sensorPin = A0;
+int ledPin = 23;
+float sensorValue = 0;
 
 
 
 void setup() {
-  AudioMemory(4);
-  Serial.begin(9600);
-  pinMode(pin, OUTPUT);
+  AudioMemory(36);
+  Serial.begin(115200);
+  pinMode(ledPin, OUTPUT);
 
 }
 
@@ -37,6 +44,14 @@ void setup() {
 elapsedMillis fps;
 
 void loop() {
+    // put your main code here, to run repeatedly:
+  sensorValue = analogRead(A0);
+//  Serial.println(sensorValue); // print the analogue value to the serial monitor
+//  sine1.amplitude(sensorValue / 1024.0 * 1.0);
+//  sine1.frequency((1024.0 - sensorValue) / 1024.0 * 440 * 2);
+
+
+
   if (fps > 24) {
     if (peak1.available()) {
       fps = 0;
@@ -46,10 +61,12 @@ void loop() {
         Serial.print(">");
       }
       Serial.println(monoPeak);
-      analogWrite(pin, monoPeak / 30 * 255);
+      analogWrite(ledPin, monoPeak / 30 * 255);
     }
   }
 //  int monoPeak = peak1.read() * 30.0;
+
+
   
 
 }
