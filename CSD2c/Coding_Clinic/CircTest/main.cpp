@@ -3,12 +3,12 @@
 //
 
 #include "CircBuffer.h"
-#
+#include "sine.h"
 #include <iostream>
 
 int main() {
 //	Make a buffer with a size of 10.
-	CircBuffer circBuffer(20);
+	CircBuffer circBuffer(10);
 
 //	Set the distance to 5.
 	circBuffer.setDistance(5);
@@ -17,8 +17,7 @@ int main() {
 	for (int i = 0; i < 10; i++) {
 		circBuffer.input(i);
 		circBuffer.incrementHeads();
-
-		std::cout << "Output: " << circBuffer.output() << std::endl;
+		std::cout << "Output: [" << i << "]: " << circBuffer.output() << std::endl;
 	}
 
 //	Print output.

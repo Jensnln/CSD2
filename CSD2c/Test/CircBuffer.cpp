@@ -4,7 +4,7 @@
 
 #include "CircBuffer.h"
 
-CircBuffer::CircBuffer (uint size) : buffer (new float[size]), currentSize (size){
+CircBuffer::CircBuffer (uint size) : buffer (new float[size]), currentSize (size)  {
 	std::cout << "The circulair buffersize is: " << currentSize << std::endl;
 }
 
