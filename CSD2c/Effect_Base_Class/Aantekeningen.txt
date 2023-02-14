@@ -1,0 +1,10 @@
+Effect Base Class:
+- processFrame();
+- setDryWet();
+- setBypass();
+
+Delay Class:
+- float[] circBuffer;
+- int readH;
+- int writeH;
+- float feedback;

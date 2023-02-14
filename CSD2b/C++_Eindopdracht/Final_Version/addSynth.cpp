@@ -49,4 +49,3 @@ void addSynth::loadFreq(float frequency) {
 		}
 	}
 }
-
