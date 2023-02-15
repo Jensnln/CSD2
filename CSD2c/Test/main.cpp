@@ -1,10 +1,10 @@
 #include "jack_module.h"
 #include <array>
 #include <iostream>
-#include "Delay.h"
+#include "delay.h"
 #include "sine.h"
-#include "Tremolo.h"
-#include "Utillities.h"
+#include "tremolo.h"
+#include "utillities.h"
 
 
 class Callback : public AudioCallback {
@@ -28,7 +28,7 @@ public:
             for (int sample = 0u; sample < numFrames; ++sample) {
                 outputChannels[channel][sample] = (
 						delays[channel].output(tremolos[channel].output(inputChannels[0][sample]))
-						+ (inputChannels[0][sample] * 0.5)
+//						+ (inputChannels[0][sample] * 0.5)
 												  ) / 2;
             }
         }
@@ -38,7 +38,6 @@ private:
 	std::array<Sine, 2> sines;
 	std::array<Delay, 2> delays;
 	std::array<Tremolo, 2> tremolos;
-
 };
 
 

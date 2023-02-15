@@ -3,8 +3,8 @@
 //
 
 #pragma once
-#include "Utillities.h"
-#include "CircBuffer.h"
+#include "utillities.h"
+#include "circBuffer.h"
 
 class Delay{
 public:

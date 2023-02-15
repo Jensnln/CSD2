@@ -2,7 +2,7 @@
 // Created by Jens on 08/02/2023.
 //
 
-#include "CircBuffer.h"
+#include "circBuffer.h"
 
 CircBuffer::CircBuffer (uint size) : buffer (new float[size]), currentSize (size)  {
 	std::cout << "The circulair buffersize is: " << currentSize << std::endl;

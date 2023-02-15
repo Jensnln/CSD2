@@ -2,7 +2,7 @@
 // Created by Jens on 14/02/2023.
 //
 
-#include "Tremolo.h"
+#include "tremolo.h"
 
 Tremolo::Tremolo() {}
 
@@ -17,7 +17,8 @@ float Tremolo::output (float input) {
 	auto modSignal = osc.output();
 	modSignal *= amp;
 	modSignal += 1.0f - amp;
-	return input * modSignal;
+
+	return input * ((1.0f - dryWet) + (dryWet * modSignal));
 }
 
 void Tremolo::setAmplitude (float amplitude) {

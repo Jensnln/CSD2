@@ -2,7 +2,7 @@
 // Created by Jens on 14/02/2023.
 //
 
-#include "Delay.h"
+#include "delay.h"
 Delay::Delay() {
 	buffer = new CircBuffer(44100 * 10);
 }
@@ -22,4 +22,4 @@ float Delay::output(float input){
 void Delay::setDistance(uint distance) {
 	buffer->setDistance(distance);
 }
- 
+

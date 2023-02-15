@@ -9,12 +9,11 @@ public:
 	Effect();
 	~Effect();
 
-	void prepare (int sampleRate);
-
-	void input(float input);
-	float output();
+	virtual void prepareToPlay (double sampleRate);
+	virtual float output(float input);
 
 	void setDryWet(float dryWet);
+
 protected:
 	float dryWet = 1.0f;
 	float sampleRate;
