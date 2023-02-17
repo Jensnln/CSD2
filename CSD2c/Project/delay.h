@@ -12,10 +12,9 @@ public:
 	Delay();
 	~Delay();
 
-	void calculate(const float& input, float& output) override;
-
 	void setDistance(uint distance);
 
+	float output(float input) override;
 private:
 	CircBuffer* buffer;
 

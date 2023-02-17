@@ -3,7 +3,6 @@
 //
 
 #pragma once
-#include <iostream>
 #include "effect.h"
 #include "sine.h"
 
@@ -12,7 +11,7 @@ struct Tremolo : public Effect{
 	~Tremolo();
 
     void prepareToPlay (double sampleRate) override;
-	void calculate(const float& input, float& output) override;
+    float output (float input) override;
 
     void setAmplitude (float amplitude);
     void setRate (float rate);

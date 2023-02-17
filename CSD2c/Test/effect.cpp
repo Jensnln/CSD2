@@ -11,6 +11,17 @@ Effect::~Effect() {
 
 void Effect::prepareToPlay(double sampleRate) {
 	this->sampleRate = sampleRate;
+
+}
+
+// Using constant float because you never want to change the input.
+void Effect::process(const float& input, float& output) {
+	if (bypass){
+		output = input;
+		return;
+	}
+	calculate(input, output);
+	output = (output * dryWet) + input * (1.0f - dryWet);
 }
 
 
@@ -21,6 +32,6 @@ void Effect::setDryWet(float dryWet) {
 	this->dryWet = dryWet;
 }
 
-float Effect::output(float input) {
-	return input;
+void Effect::setBypass(bool bypass) {
+	this->bypass = bypass;
 }

@@ -24,7 +24,7 @@ protected:
 	float shape;
 
 private:
-	inline float mapInRage(float value, float inMin, float inMax, float outMin, float outMax);{
+	inline float mapInRange(float value, float inMin, float inMax, float outMin, float outMax);{
 		return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 	}
 	inline float linearMap(float value, float inMin, float inMax, float outMin, float outMax);{

@@ -11,12 +11,18 @@ Delay::~Delay() {
 	delete buffer;
 }
 
-float Delay::output(float input){
+void Delay::calculate(const float& input, float& output) {
+//	Delayed sample (value at readhead).
+	auto delay = buffer->output();
+
+//	Write the input to the buffer (value to writehead).
 	buffer->input(input);
-	float output = buffer->output();
+
+//	Increment the read and write heads.
 	buffer->incrementHeads();
 
-	return output;
+//	Apply the delayed sample to the output.
+	output = delay;
 }
 
 void Delay::setDistance(uint distance) {

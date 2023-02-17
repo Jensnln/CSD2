@@ -23,7 +23,7 @@ float Waveshaper::output(float input){
 
 void Waveshaper::setDrive(float k) {
 	for (int i = 0; i < bufferSize; i++){
-		float x = mapInRage(i, 0.0f, bufferSize, -1.0f, 1.0f);
+		float x = mapInRange(i, 0.0f, bufferSize, -1.0f, 1.0f);
 		buffer[i] = atan(x * k) / atan(k);
 	}
 }

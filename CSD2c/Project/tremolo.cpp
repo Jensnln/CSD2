@@ -9,17 +9,16 @@ Tremolo::Tremolo() {}
 Tremolo::~Tremolo() {}
 
 void Tremolo::prepareToPlay (double sampleRate) {
-	Effect::prepareToPlay(sampleRate);
 	osc.prepareToPlay(sampleRate);
-	osc.setDelta(1.0);
+	osc.setDelta(2.0);
 }
 
-void Tremolo::calculate(const float& input, float& output) {
+float Tremolo::output (float input) {
 	auto modSignal = osc.output();
 	modSignal *= amp;
 	modSignal += 1.0f - amp;
 
-	output = input * modSignal;
+	return input * ((1.0f - dryWet) + (dryWet * modSignal));
 }
 
 void Tremolo::setAmplitude (float amplitude) {

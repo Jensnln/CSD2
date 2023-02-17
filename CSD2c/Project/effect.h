@@ -9,10 +9,11 @@ public:
 	Effect();
 	~Effect();
 
-	void process(const float& input, float& output);
+	void process(float& input, float& output);
 
-	virtual void calculate(const float& input, float& output) = 0;
-	virtual void prepareToPlay (double sampleRate);
+
+	virtual void prepareToPlay (double sampleRate) = 0;
+	virtual float output(float input);
 
 	void setDryWet(float dryWet);
 	void setBypass(bool bypass);

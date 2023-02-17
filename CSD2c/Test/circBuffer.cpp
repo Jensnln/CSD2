@@ -3,11 +3,12 @@
 //
 
 #include "circBuffer.h"
-
+// Makes new buffer of type float with uint size.
 CircBuffer::CircBuffer (uint size) : buffer (new float[size]), currentSize (size)  {
 	std::cout << "The circulair buffersize is: " << currentSize << std::endl;
 }
 
+// Deletes buffer.
 CircBuffer::~CircBuffer() {
 	deleteBuffer();
 }
