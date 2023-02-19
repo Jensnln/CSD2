@@ -1,7 +1,7 @@
 CXX= g++
 CXXFLAGS = -I/usr/local/include -Wall -std=c++1z -g
 LDFLAGS= -ljack
-SOURCE=main.o delay.o circBuffer.o effect.o tremolo.o
+SOURCE=main.o delay.o circBuffer.o effect.o tremolo.o waveshaper.o writeToFile.o
 TARGET= app
 
 $(TARGET) : $(SOURCE)

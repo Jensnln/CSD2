@@ -13,7 +13,6 @@ public:
 	~Delay();
 
 	void calculate(const float& input, float& output) override;
-
 	void setDistance(uint distance);
 
 private:

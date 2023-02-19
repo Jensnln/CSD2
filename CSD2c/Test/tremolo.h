@@ -6,6 +6,7 @@
 #include <iostream>
 #include "effect.h"
 #include "sine.h"
+#include "utillities.h"
 
 struct Tremolo : public Effect{
 	Tremolo();
