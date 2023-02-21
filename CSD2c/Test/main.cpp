@@ -14,9 +14,8 @@ public:
 		testSine.prepareToPlay(static_cast <double> (sampleRate));
 		for (WaveShaper& waveShaper: waveShapers){
 			waveShaper.prepareToPlay(static_cast<double> (sampleRate));
-			waveShaper.setDrive(20);
+			waveShaper.setDrive(1);
 		}
-
 		for (Sine& sine : sines){
 			sine.prepareToPlay (static_cast<double> (sampleRate));
 			sine.setDelta(440);
@@ -37,12 +36,11 @@ public:
 
         for (int channel = 0u; channel < numOutputChannels; ++channel) {
             for (int sample = 0u; sample < numFrames; ++sample) {
-//				waveShapers[channel].setChannel(channel);
 //				outputChannels[channel][sample] = sines[channel].output();
 				waveShapers[0].process(sines[channel].output(), outputChannels[channel][sample]);
 				tremolos[channel].process(outputChannels[channel][sample], outputChannels[channel][sample]);
-				delays[channel].process(outputChannels[channel][sample], outputChannels[channel][sample]);
-//                delays[channel].process(inputChannels[0][sample], outputChannels[channel][sample]);
+//				delays[channel].process(inputChannels[0][sample], outputChannels[channel][sample]);
+//				waveShapers[channel].process(outputChannels[channel][sample], outputChannels[channel][sample]);
 
             }
         }

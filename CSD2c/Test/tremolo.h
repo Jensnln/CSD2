@@ -12,9 +12,11 @@ struct Tremolo : public Effect{
 	Tremolo();
 	~Tremolo();
 
+//	Virtual functions from Effect.
     void prepareToPlay (double sampleRate) override;
 	void calculate(const float& input, float& output) override;
 
+//	Set & Get.
     void setAmplitude (float amplitude);
     void setRate (float rate);
 

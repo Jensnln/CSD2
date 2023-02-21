@@ -14,10 +14,7 @@ struct WaveShaper : public Effect {
 	WaveShaper(uint size);
 	~WaveShaper();
 
-	int setChannel(int chan);
-
 	void calculate(const float& input, float& output) override;
-//	void prepareToPlay (double sampleRate) override;
 
 	void setDrive(float k);
 

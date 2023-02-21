@@ -1,8 +1,8 @@
 CXX= g++
 CXXFLAGS = -I/usr/local/include -Wall -std=c++1z -g
 LDFLAGS= -ljack
-SOURCE= FFT.o writeToFile.o
-TARGET= FFT
+SOURCE= main.o
+TARGET= app
 
 $(TARGET) : $(SOURCE)
 	$(CXX) -o $@ $(SOURCE) $(LDFLAGS)

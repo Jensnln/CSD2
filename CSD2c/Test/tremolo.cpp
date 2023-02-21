@@ -15,10 +15,10 @@ void Tremolo::prepareToPlay (double sampleRate) {
 }
 
 void Tremolo::calculate(const float& input, float& output) {
+//	Mod signal is osc output.
 	auto modSignal = osc.output();
 	modSignal *= amp;
 	modSignal += 1.0f - amp;
-
 	output = input * modSignal;
 }
 
