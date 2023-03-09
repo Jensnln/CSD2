@@ -19,8 +19,7 @@ struct WaveShaper : public Effect {
 	void setDrive(float k);
 
 private:
-	int chan;
-	float k = 1;
+	float k = 1.0f;
 	uint bufferSize;
 	float* buffer;
 

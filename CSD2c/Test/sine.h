@@ -19,6 +19,10 @@ struct Sine {
     }
 
     float calculate() {
+
+		sin(phase * pi * 2.0f);
+		sin(phase);
+
         return sin (phase * pi * 2.0f);
     }
 

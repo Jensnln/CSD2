@@ -46,4 +46,3 @@ void WaveShaper::setDrive(float k) {
 		fileWriter.write(std::to_string(buffer[i]) + "\n");
 	}
 }
-

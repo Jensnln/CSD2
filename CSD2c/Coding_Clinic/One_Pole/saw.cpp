@@ -7,17 +7,18 @@
 Saw::Saw() {}
 
 Saw::~Saw() {
+
 }
 
 void Saw::calculate() {
 	sample = (phase * 2 - 1) * amplitude;
 }
 
+
 float Saw::getSample() {
-	calculate();
-	Oscillator::tick();
 	return sample;
 }
+
 
 void Saw::print(int instance) {
 	std::cout << "Saw[" << instance << "]" << std::endl;

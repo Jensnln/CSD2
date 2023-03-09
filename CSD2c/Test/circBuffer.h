@@ -4,6 +4,7 @@
 
 #pragma once
 #include <iostream>
+#include <cmath>
 
 class CircBuffer {
     using uint = unsigned int;
@@ -18,7 +19,8 @@ public:
     void setDistance (uint distance);
     void incrementHeads();
 
-private:
+	float interpolate (float* buffer, float index, int size);
+
     inline void wrapHeader (uint& head);
     inline void incrementWrite();
     inline void incrementRead();

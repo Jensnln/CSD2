@@ -3,6 +3,8 @@
 //
 
 #include "delay.h"
+
+
 Delay::Delay() {
 	buffer = new CircBuffer(44100 * 10);
 }

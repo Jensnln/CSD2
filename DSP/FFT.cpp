@@ -39,42 +39,41 @@ void FIR(int bins){
 	} cout << endl;
 
 
-//	For loop for amount of bins.
-	for (int n = 0; n < bins; n++){
-		complex <double> H (0, 0);
+//// Fixed coefs.
+//	for (int n = 0; n < bins + 1; n++){
+////		Define coefs.
+//		double c1 = 0.5;
+//		double c2 = 0.5;
+//
+//		double W = Wfactor * n;
+//		complex <double> H = c1 + c2 * exp(i * W);
+//
+//		cout << "a1: " << abs(H) << " ";
+//		cout << "p1: " << arg(H) << endl;
+//	}
+
+//	Variable coefs.
+	for (int n = 0; n < bins+1; n++){
+//		Declare and reset.
+		complex <double> H =  (0, 0);
+
 		double W = Wfactor * n;
 
-//		Testing.
 		for (int j = 0; j < factors.size(); j++){
-			H += (
-					factors[j] *
-					exp(i * (static_cast<double>(j) - 1) * W)
-					);
-//			cout << "factor [" << j << "]: " << factors[j] << endl;
+			H += ( factors[j] * exp(-i * W * double(j - 1)) );
 		}
 
-		cout << "H[" << n << "]: " << H << endl;
-		cout << "a1: " << abs(H) << " ";
-		cout << "p1: " << arg(H) << endl;
-
-
-
-
-//		Good version.
-		/*complex <double> */ H = 0.5 + (0.5*exp(i * W * static_cast<double> (n)));
-		cout << "H2[" << n << "]: " << H << endl;
+//		cout << "H2: [" << n << "] " << H << " ";
+		fileWriterA.write(std::to_string(abs(H)) + "\n");
+		fileWriterP.write(std::to_string(arg(H)) + "\n");
 		cout << "a2: " << abs(H) << " ";
 		cout << "p2: " << arg(H) << endl;
-
-//		fileWriter.write(to_string(abs(H)) + "\n");
-		fileWriterA.write(to_string(abs(H)) + "\n");
-		fileWriterP.write(to_string(arg(H)) + "\n");
 	}
+
 }
 
 int main(){
-
-	FIR(4);
+	FIR(44100);
 	return 0;
 }
 

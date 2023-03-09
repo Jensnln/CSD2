@@ -24,7 +24,7 @@ float CircBuffer::output(){
 void CircBuffer::setDistance (uint distance) {
 	this->distance = distance;
 	readHead = (writeHead - this->distance + currentSize) % currentSize;
-	std::cout << "The Distance is: " << distance << std::endl;
+//	std::cout << "The Distance is: " << distance << std::endl;
 }
 
 void CircBuffer::incrementHeads(){
@@ -46,6 +46,20 @@ inline void CircBuffer::incrementRead() {
 
 inline void CircBuffer::wrapHeader (uint& head) {
 	if (head >= currentSize) head = 0;
+}
+
+// Interpolates between two values in a buffer.
+float CircBuffer::interpolate (float* buffer, float index, int size) {
+	int indexInt = static_cast <int> (index);
+	float frac = index - indexInt;
+
+	int index1 = (indexInt + size - 1) % size;
+	int index2 = (index1 + 1) % size;
+
+	float a = buffer[index1];
+	float b = buffer[index2];
+
+	return a + frac * (b - a);
 }
 
 void CircBuffer::deleteBuffer() {

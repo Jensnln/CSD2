@@ -21,7 +21,7 @@ fig, ax = plt.subplots()
 ax.plot(t, np_data)
 plt.yticks(np.arange(-1., 1., 1.0))
 ax.set(xlabel='sample', ylabel='output',
-       title='Output data')
+       title='Phase')
 ax.grid()
 
 # To save the result, outcomment the line below:
