@@ -13,9 +13,9 @@ complex <double> i(0.0f, 1.0f);
 
 void FIR(int bins){
 //	Write to .csv file for the python plotter.
-//	WriteToFile fileWriter("a.csv", true);
 	WriteToFile fileWriterA("a.csv", true);
 	WriteToFile fileWriterP("p.csv", true);
+
 	cout << "Bins: " << bins << endl;
 	double Wfactor = M_PI / bins;
 
