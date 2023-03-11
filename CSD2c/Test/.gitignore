@@ -13,3 +13,4 @@
         ../../DSP/test/app
         ../../Maker Skills Hardware/Teensy/Final_Assignment/
         cmake-build-debug/
+        ../../cmake-build-debug
