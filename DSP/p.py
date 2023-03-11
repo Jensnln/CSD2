@@ -2,6 +2,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
+import sys
 
 # create a list and import data from output.csv file
 data = list()
@@ -19,7 +20,9 @@ t = np.arange(0, len(data), 1)
 # create plot
 fig, ax = plt.subplots()
 ax.plot(t, np_data)
-plt.yticks(np.arange(-1., 1., 1.0))
+amount = len(data) -1
+plt.yticks([-3.14, -2.36, -1.57, -0.79, 0, 0.79, 1.57, 2.36, 3.14], ["-π", "-3π/4", "-π/2", "-π/4", "0", "π/4", "π/2", "3π/4", "π"])
+plt.xticks([0, amount /4, amount / 2, amount ], ["0", "π/4", "π/2", "π"])
 ax.set(xlabel='sample', ylabel='output',
        title='Phase')
 ax.grid()

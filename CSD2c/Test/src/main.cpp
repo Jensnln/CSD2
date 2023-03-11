@@ -45,7 +45,7 @@ public:
 
         for (int channel = 0u; channel < numOutputChannels; ++channel) {
             for (int sample = 0u; sample < numFrames; ++sample) {
-//				outputChannels[channel][sample] = sines[channel].output();
+				outputChannels[channel][sample] = sines[channel].output();
 //				chorusses[channel].process(inputChannels[0][sample], outputChannels[channel][sample]);
 //				chorusses[channel].process(sines[channel].output(), outputChannels[channel][sample]);
 //				waveShapers[0].process(sines[channel].output(), outputChannels[channel][sample]);

@@ -73,7 +73,7 @@ void FIR(int bins){
 }
 
 int main(){
-	FIR(44100);
+	FIR(10);
 	return 0;
 }
 

@@ -26,3 +26,5 @@ node_modules
 *.o
 *.s
 *.jens
+
+cmake_buid-debug/
