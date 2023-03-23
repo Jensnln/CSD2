@@ -1,6 +1,5 @@
 CXX= g++
 CXXFLAGS = -I/usr/local/include -Wall -std=c++1z -g
-LDFLAGS= -ljack
 SOURCE= FFT.o writeToFile.o
 TARGET= FFT
 

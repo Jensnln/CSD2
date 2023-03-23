@@ -21,10 +21,28 @@ amount = len(data) -1
 
 fig, ax = plt.subplots()
 ax.plot(t, np_data)
-plt.yticks(np.arange([-3.14, -2.36, -1.57, -0.79, 0, 0.79, 1.57, 2.36, 3.14], ["-π", "-3π/4", "-π/2", "-π/4", "0", "π/4", "π/2", "3π/4", "π"]))
-plt.xticks([0, amount /4, amount / 2, amount ], ["0", "π/4", "π/2", "π"])
-ax.set(xlabel='sample', ylabel='output',
-       title='Output data')
+
+if min(data) > -78:
+    min = round(min(data) - 6, -1)
+    step = round(min / -7)
+    step = 1
+else:
+    min = -78
+    plt.ylim(-78, 6)
+    step = 6.
+if (max(data) > 6.0):
+    max = max(data)
+else:
+    max = 6.0
+yname = "Gain (dB)"
+name = "Amplitude Response"
+
+
+plt.yticks(np.arange(min, max, step))
+amount = len(data)-1
+plt.xticks([0, amount/4, amount/2, amount/4*3, amount], ["0", "0.25π", "0.5π", "0.75π", "π"])
+ax.set(xlabel='Frequency', ylabel=yname,
+       title=name)
 ax.grid()
 
 # To save the result, outcomment the line below:

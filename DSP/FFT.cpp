@@ -60,20 +60,22 @@ void FIR(int bins){
 		double W = Wfactor * n;
 
 		for (int j = 0; j < factors.size(); j++){
-			H += ( factors[j] * exp(-i * W * double(j - 1)) );
+			H += ( factors[j] * exp(-i * W * double(j)));
 		}
 
 //		cout << "H2: [" << n << "] " << H << " ";
 		fileWriterA.write(std::to_string(abs(H)) + "\n");
 		fileWriterP.write(std::to_string(arg(H)) + "\n");
-		cout << "a2: " << abs(H) << " ";
-		cout << "p2: " << arg(H) << endl;
+		cout << "H: " << H << " ";
+//		cout << "amp: " << 20 * log10(abs(H)) << " ";
+		cout << "amp: " << abs(H) << " ";
+		cout << "pha: " << arg(H) << endl;
 	}
 
 }
 
 int main(){
-	FIR(10);
+	FIR(100);
 	return 0;
 }
 
